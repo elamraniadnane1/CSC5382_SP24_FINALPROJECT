@@ -165,17 +165,21 @@ print("Neutral:", predicted_probability[2])
 
 **Datasets are uploaded in the same branch of this GitHub Link, other Datasets will be WebScrapped using a specific tool : TwExtract**
 
-**Metrics for business goal evaluation**
-Accuracy of the model in predicting election outcomes compared to actual results.
-Accuracy of Stance Detection, Organization Satisfaction
-Precision and recall in classifying sentiments towards specific candidates or issues.
-Timeliness of insights, as political campaigns require rapid response to changing public opinions.
-Robustness of the model against shifts in political discourse and the introduction of new topics or candidates.
-Improvement Over Baselines: The degree to which the new model outperforms existing models and baselines could be a business metric, indicating the value added by the new approach.
+**Metrics for Business Goal Evaluation**
+
+- **Accuracy of Election Outcome Prediction:** The model's accuracy in predicting election outcomes compared to actual results.
+- **Stance Detection Accuracy and Organization Satisfaction:** How accurately the model detects stances, and the satisfaction level of organizations using it.
+- **Precision and Recall in Sentiment Classification:** The model's precision and recall in classifying sentiments towards specific candidates or issues.
+- **Timeliness of Insights:** The ability of the model to provide rapid insights, crucial for political campaigns responding to changing public opinions.
+- **Robustness Against Political Discourse Shifts:** The model's robustness against shifts in political discourse and the introduction of new topics or candidates.
+- **Improvement Over Baselines:** The degree to which the new model outperforms existing models and baselines, indicating the added value of the new approach.
+
 
 **Other References**
-https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9530657
-https://www.researchgate.net/publication/354427394_Biden_vs_Trump_Modelling_US_general_elections_using_BERT_language_model
-https://huggingface.co/kornosk/bert-election2020-twitter-stance-biden-KE-MLM
-https://paperswithcode.com/paper/knowledge-enhanced-masked-language-model-for
+
+- [IEEE Xplore - [Paper Title or Description]](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9530657)
+- [ResearchGate - Biden vs. Trump: Modelling US General Elections using BERT Language Model](https://www.researchgate.net/publication/354427394_Biden_vs_Trump_Modelling_US_general_elections_using_BERT_language_model)
+- [Hugging Face Model Repository - kornosk/bert-election2020-twitter-stance-biden-KE-MLM](https://huggingface.co/kornosk/bert-election2020-twitter-stance-biden-KE-MLM)
+- [Papers With Code - Knowledge-Enhanced Masked Language Model for Stance Detection](https://paperswithcode.com/paper/knowledge-enhanced-masked-language-model-for)
+
 
