@@ -106,6 +106,9 @@ This model is initialized with BERT-base and trained with normal MLM objective w
 Usage
 This pre-trained language model is fine-tuned to the stance detection task specifically for Joe Biden.
 
+*Link the the model files*
+https://huggingface.co/kornosk/bert-election2020-twitter-stance-biden/tree/main
+
 ```python
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
