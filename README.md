@@ -100,6 +100,7 @@ This model is initialized with BERT-base and trained with normal MLM objective w
 Usage
 This pre-trained language model is fine-tuned to the stance detection task specifically for Joe Biden.
 
+```python
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
 import numpy as np
@@ -155,6 +156,7 @@ print("Prediction:", id2label[np.argmax(predicted_probability)])
 print("Against:", predicted_probability[0])
 print("Favor:", predicted_probability[1])
 print("Neutral:", predicted_probability[2])
+
 
 
 **Datasets are uploaded in the same branch of this GitHub Link, other Datasets will be WebScrapped using a specific tool : TwExtract**
