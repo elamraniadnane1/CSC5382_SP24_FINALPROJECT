@@ -2,19 +2,37 @@
 
 # By : Adnane El Amrani
 
-# Business case
+## Table of Contents
+1. [Business Case](#business-case)
+2. [Business Value of Using ML (Impact)](#business-value-of-using-ml-impact)
+3. [ML Framing](#ml-framing)
+4. [Data Requirements](#data-requirements)
+5. [Feasibility and Baseline](#feasibility-including-specification-of-a-baseline)
+6. [Choice Justification](#providing-arguments-for-my-choice)
+7. [Paper Methodology](#paper-methodology)
+8. [Sentiment Analysis](#sentiment-analysis)
+9. [Stance Detection](#stance-detection)
+10. [Importance of Both Tasks](#importance-of-both-tasks)
+11. [Model Card for Baseline](#model-card-for-the-baseline-after-getting-inspired-from-huggingface-model-cards)
+12. [Sample Code](#sample-code)
+13. [Datasets and Tools](#datasets-are-uploaded-in-the-same-branch-of-this-github-link-other-datasets-will-be-webscrapped-using-a-specific-tool-twextract)
+14. [Metrics for Business Goal Evaluation](#metrics-for-business-goal-evaluation)
+15. [Other References](#other-references)
+
+## Business Case
+
 The objective is to develop an ML model to predict the outcome of the 2024 U.S. presidential election based on sentiment analysis of publicly available text data that in form of Tweets. 
 The model would help political analysts, campaign managers, news agencies, and bettors understand public sentiment and potential voting patterns.
 Insights derived from the model could inform campaign strategies, media coverage, political advertizers and financial markets.
 
-# Business value of using ML (impact)
+## Business Value of Using ML (Impact)
 
 The goal is to leverage ML for predicting election outcomes, enabling businesses to make informed investment decisions in advertising and campaign strategies.
 Provides political strategists and campaigners with insights into public opinion trends, enabling data-driven decision-making.
 Forecasts election outcomes, aiding in investment decisions related to campaign financing and media planning.
 Maximizing ROI: By improving the accuracy of sentiment analysis, the model aids in minimizing losses and risks associated with political investments, optimizing tax strategies, and maximizing ROI.
 
-# ML framing
+## ML Framing
 
 **Project Archetype : Sentiment Analysis and Stance Detection in Political Context**
 
@@ -29,7 +47,7 @@ Maximizing ROI: By improving the accuracy of sentiment analysis, the model aids 
 •	Target Audience: Political analysts, campaign strategists, digital marketers, and researchers
 •	Use Cases: Predicting election outcomes, analyzing public opinion trends, enhancing targeted political campaigning.
 
-**Data Requirements**
+## Data Requirements
 
 A large and diverse dataset of text data, including social media posts, news articles, and transcripts of political speeches and debates.
 The data should cover a wide range of political topics, demographics, and geographical locations to ensure representativeness.
@@ -38,10 +56,11 @@ Access to historical election data, polling results, and demographic information
 
 
 
-**Feasibility including specification of a baseline**
-The baselines are NLP models on sentiment analysis tasks, such as SVM or Naive Bayes classifiers, before the introduction of BERT. 
-For details about the baseline and the datasets please consult:
+## Feasibility including specification of a baseline
 
+The baselines are NLP models on sentiment analysis tasks, such as SVM or Naive Bayes classifiers, before the introduction of BERT. 
+
+For details about the baseline and its datasets please consult as well as the model card below:
 https://huggingface.co/kornosk
 https://github.com/GU-DataLab/stance-detection-KE-MLM
 https://aclanthology.org/2021.naacl-main.376/
@@ -70,21 +89,21 @@ The following paper inspired me to improve the used method and consequently make
 - **Contributions and Resources:** The authors release their labeled stance dataset to aid further research and highlight their contributions, including the log-odds-ratio technique for identifying stance words and the novel fine-tuning method.
 - **Conclusions and Future Work:** They conclude that their approach can serve as a new standard for stance detection. They also suggest future research directions, such as adjusting the significance level of tokens during fine-tuning and exploring the application of their method to other NLP tasks.
 
-### Sentiment Analysis:
+## Sentiment Analysis:
 
 - **Goal:** The goal of sentiment analysis is to determine the emotional tone behind a series of words, used to gain an understanding of the attitudes, opinions, and emotions expressed within an online mention.
 - **Concern:** It is primarily concerned with identifying the polarity of text content - whether the expressed opinion in the text is positive, negative, or neutral.
 - **Applications:** Sentiment analysis is often applied to social media posts, reviews, and any other places where people express their opinions to understand consumer sentiment, public opinion, etc.
 - **Techniques:** Techniques include machine learning models such as Naive Bayes, Logistic Regression, SVM, and deep learning approaches like LSTM, as well as lexicon-based methods that assign sentiment scores to words.
 
-### Stance Detection:
+## Stance Detection:
 
 - **Objective:** Stance detection is about determining the writer's position (favor, against, neutral) on a specific topic or claim, regardless of the emotional content.
 - **Focus:** Unlike sentiment analysis, which focuses on the affective aspect, stance detection identifies the alignment of the author's point of view with a particular standpoint.
 - **Importance:** It is a crucial task in understanding public opinion on controversial issues, gauging support for political candidates or policies, and analyzing debates.
 - **Challenges:** The challenge in stance detection lies in the subtleties of language, as the same expression can be used sarcastically or earnestly, and the stance might not be explicitly stated but implied.
 
-### Importance of Both Tasks:
+## Importance of Both Tasks:
 
 - **Sentiment Analysis Uses:** Sentiment analysis is widely used in brand monitoring, market research, and customer service, as it provides insights into how people feel about products, services, or topics.
 - **Stance Detection Uses:** Stance detection is particularly useful in political science, public policy, and argument mining, where understanding the position someone takes is more critical than the emotional tone of their language.
@@ -92,7 +111,7 @@ The following paper inspired me to improve the used method and consequently make
 
 
 
-**Model card for the baseline, after getting inspired from Huggingface model cards**
+## Model Card for the Baseline, after getting inspired from Huggingface model cards
 
 Pre-trained BERT on Twitter US Election 2020 for Stance Detection towards Joe Biden (KE-MLM)
 Pre-trained weights for KE-MLM model in Knowledge Enhance Masked Language Model for Stance Detection, NAACL 2021.
@@ -109,6 +128,7 @@ This pre-trained language model is fine-tuned to the stance detection task speci
 *Link the the model files*
 https://huggingface.co/kornosk/bert-election2020-twitter-stance-biden/tree/main
 
+## Sample Code 
 ```python
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
