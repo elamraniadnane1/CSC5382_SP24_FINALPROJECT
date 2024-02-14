@@ -46,44 +46,48 @@ https://aclanthology.org/2021.naacl-main.376/
 
 **Providing arguments for my choice (e.g., published state of the art results, give credit to the authors)**
 
-The following paper made me think to improve the used method and then made such a choice. This paper "Knowledge Enhanced Masked Language Model for Stance Detection" by Kornraphop Kawintiranon and Lisa Singh presented a novel approach to improve stance detection in tweets related to political entities, specifically in the context of the 2020 US Presidential election. 
-https://aclanthology.org/2021.naacl-main.376/
-Both the binary of the trained model and the notebook to retrain are available.
+The following paper inspired me to improve the used method and consequently make such a choice. The paper, ["Knowledge Enhanced Masked Language Model for Stance Detection"](https://aclanthology.org/2021.naacl-main.376/) by Kornraphop Kawintiranon and Lisa Singh, presented a novel approach to improve stance detection in tweets related to political entities, specifically in the context of the 2020 US Presidential election. Both the binary of the trained model and the notebook to retrain are available.
 
-Methdology:
+### Methodology:
 
-Problem Definition: They define stance detection as classifying text to determine if the position is in support, opposition, or neutral towards a target, such as a political candidate.
-Challenges of Twitter Data: The authors acknowledge the unique challenges posed by Twitter's data, including the brevity of tweets, the rapid evolution of language and terminology, and the deviation from standard prose.
-Fine-Tuning Language Models: They discuss how fine-tuning pre-trained models with large-scale in-domain data has become the state-of-the-art approach for many NLP tasks, including stance detection.
-Weighted Log-Odds-Ratio for Word Identification: Unlike random token masking in traditional BERT pre-training, the authors propose using weighted log-odds-ratio to identify and focus on words with high stance distinguishability. This helps in better understanding the stance each word represents in the context of political discourse.
-Attention Mechanism Focusing on Key Words: By modeling an attention mechanism that concentrates on stance-significant words, the language model becomes more attuned to stance-related nuances in the text.
-Performance Superiority: They show that their proposed approach outperforms the state-of-the-art in stance detection for Twitter data about the 2020 US Presidential election.
-Methodology:
-  They collect and preprocess a dataset of tweets related to the election.
-  Significant stance words are identified using knowledge mining techniques.
-  An enhanced Masked Language Model (MLM) is created by masking these significant tokens.
-  The model is fine-tuned on the stance detection task using a labeled dataset.
-  Their novel KE-MLM approach integrates these significant tokens during the fine-tuning process for BERT.
-Empirical Evaluation: They evaluate their model using a dataset containing labeled tweets about the election, showing improvements in detection accuracy.
-Contributions and Resources: The authors release their labeled stance dataset to aid further research and highlight their contributions, including the log-odds-ratio technique for identifying stance words and the novel fine-tuning method.
-Conclusions and Future Work: They conclude that their approach can serve as a new standard for stance detection. They also suggest future research directions, such as adjusting the significance level of tokens during fine-tuning and exploring the application of their method to other NLP tasks.
+- **Problem Definition:** They define stance detection as classifying text to determine if the position is in support, opposition, or neutral towards a target, such as a political candidate.
+- **Challenges of Twitter Data:** The authors acknowledge the unique challenges posed by Twitter's data, including the brevity of tweets, the rapid evolution of language and terminology, and the deviation from standard prose.
+- **Fine-Tuning Language Models:** They discuss how fine-tuning pre-trained models with large-scale in-domain data has become the state-of-the-art approach for many NLP tasks, including stance detection.
+- **Weighted Log-Odds-Ratio for Word Identification:** Unlike random token masking in traditional BERT pre-training, the authors propose using weighted log-odds-ratio to identify and focus on words with high stance distinguishability. This helps in better understanding the stance each word represents in the context of political discourse.
+- **Attention Mechanism Focusing on Key Words:** By modeling an attention mechanism that concentrates on stance-significant words, the language model becomes more attuned to stance-related nuances in the text.
+- **Performance Superiority:** They show that their proposed approach outperforms the state-of-the-art in stance detection for Twitter data about the 2020 US Presidential election.
 
-Sentiment Analysis:
-The goal of sentiment analysis is to determine the emotional tone behind a series of words, used to gain an understanding of the attitudes, opinions, and emotions expressed within an online mention.
-It is primarily concerned with identifying the polarity of text content - whether the expressed opinion in the text is positive, negative, or neutral.
-Sentiment analysis is often applied to social media posts, reviews, and any other places where people express their opinions to understand consumer sentiment, public opinion, etc.
-Techniques include machine learning models such as Naive Bayes, Logistic Regression, SVM, and deep learning approaches like LSTM, as well as lexicon-based methods that assign sentiment scores to words.
-Stance Detection:
-Stance detection is about determining the writer's position (favor, against, neutral) on a specific topic or claim, regardless of the emotional content.
-Unlike sentiment analysis, which focuses on the affective aspect, stance detection identifies the alignment of the author's point of view with a particular standpoint.
-It is a crucial task in understanding public opinion on controversial issues, gauging support for political candidates or policies, and analyzing debates.
-Stance detection often requires understanding the context beyond the text itself, as a positive sentiment does not necessarily mean support for a certain stance, and vice versa.
-The challenge in stance detection lies in the subtleties of language, as the same expression can be used sarcastically or earnestly, and the stance might not be explicitly stated but implied.
+#### Steps in their Methodology:
+1. Collect and preprocess a dataset of tweets related to the election.
+2. Identify significant stance words using knowledge mining techniques.
+3. Create an enhanced Masked Language Model (MLM) by masking these significant tokens.
+4. Fine-tune the model on the stance detection task using a labeled dataset.
+5. Integrate these significant tokens during the fine-tuning process for BERT in their novel KE-MLM approach.
 
-Both tasks are important for different reasons and use cases:
-Sentiment analysis is widely used in brand monitoring, market research, and customer service, as it provides insights into how people feel about products, services, or topics.
-Stance detection is particularly useful in political science, public policy, and argument mining, where understanding the position someone takes is more critical than the emotional tone of their language.
-Advanced NLP systems may perform both tasks together to gain a comprehensive understanding of text data, using sentiment analysis to capture the emotional tone and stance detection to understand the position towards the subject matter.
+- **Empirical Evaluation:** They evaluate their model using a dataset containing labeled tweets about the election, showing improvements in detection accuracy.
+- **Contributions and Resources:** The authors release their labeled stance dataset to aid further research and highlight their contributions, including the log-odds-ratio technique for identifying stance words and the novel fine-tuning method.
+- **Conclusions and Future Work:** They conclude that their approach can serve as a new standard for stance detection. They also suggest future research directions, such as adjusting the significance level of tokens during fine-tuning and exploring the application of their method to other NLP tasks.
+
+### Sentiment Analysis:
+
+- **Goal:** The goal of sentiment analysis is to determine the emotional tone behind a series of words, used to gain an understanding of the attitudes, opinions, and emotions expressed within an online mention.
+- **Concern:** It is primarily concerned with identifying the polarity of text content - whether the expressed opinion in the text is positive, negative, or neutral.
+- **Applications:** Sentiment analysis is often applied to social media posts, reviews, and any other places where people express their opinions to understand consumer sentiment, public opinion, etc.
+- **Techniques:** Techniques include machine learning models such as Naive Bayes, Logistic Regression, SVM, and deep learning approaches like LSTM, as well as lexicon-based methods that assign sentiment scores to words.
+
+### Stance Detection:
+
+- **Objective:** Stance detection is about determining the writer's position (favor, against, neutral) on a specific topic or claim, regardless of the emotional content.
+- **Focus:** Unlike sentiment analysis, which focuses on the affective aspect, stance detection identifies the alignment of the author's point of view with a particular standpoint.
+- **Importance:** It is a crucial task in understanding public opinion on controversial issues, gauging support for political candidates or policies, and analyzing debates.
+- **Challenges:** The challenge in stance detection lies in the subtleties of language, as the same expression can be used sarcastically or earnestly, and the stance might not be explicitly stated but implied.
+
+### Importance of Both Tasks:
+
+- **Sentiment Analysis Uses:** Sentiment analysis is widely used in brand monitoring, market research, and customer service, as it provides insights into how people feel about products, services, or topics.
+- **Stance Detection Uses:** Stance detection is particularly useful in political science, public policy, and argument mining, where understanding the position someone takes is more critical than the emotional tone of their language.
+- **Combined Application:** Advanced NLP systems may perform both tasks together to gain a comprehensive understanding of text data, using sentiment analysis to capture the emotional tone and stance detection to understand the position towards the subject matter.
+
 
 
 **Model card for the baseline, after getting inspired from Huggingface model cards**
@@ -157,7 +161,7 @@ print("Against:", predicted_probability[0])
 print("Favor:", predicted_probability[1])
 print("Neutral:", predicted_probability[2])
 
-
+```
 
 **Datasets are uploaded in the same branch of this GitHub Link, other Datasets will be WebScrapped using a specific tool : TwExtract**
 
