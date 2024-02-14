@@ -1,5 +1,7 @@
 # SPRING2024_PROJECT_MODELCARD_ARTIFICIALINTELLIGENCE_FOR_DIGITAL_TRANSFORMATION
 
+# By : Adnane El Amrani
+
 # Business case
 The objective is to develop an ML model to predict the outcome of the 2024 U.S. presidential election based on sentiment analysis of publicly available text data that in form of Tweets. 
 The model would help political analysts, campaign managers, news agencies, and bettors understand public sentiment and potential voting patterns.
@@ -44,11 +46,11 @@ https://huggingface.co/kornosk
 https://github.com/GU-DataLab/stance-detection-KE-MLM
 https://aclanthology.org/2021.naacl-main.376/
 
-**Providing arguments for my choice (e.g., published state of the art results, give credit to the authors)**
+## Providing arguments for my choice (e.g., published state of the art results, give credit to the authors)**
 
 The following paper inspired me to improve the used method and consequently make such a choice. The paper, ["Knowledge Enhanced Masked Language Model for Stance Detection"](https://aclanthology.org/2021.naacl-main.376/) by Kornraphop Kawintiranon and Lisa Singh, presented a novel approach to improve stance detection in tweets related to political entities, specifically in the context of the 2020 US Presidential election. Both the binary of the trained model and the notebook to retrain are available.
 
-### Methodology:
+## Paper Methodology:
 
 - **Problem Definition:** They define stance detection as classifying text to determine if the position is in support, opposition, or neutral towards a target, such as a political candidate.
 - **Challenges of Twitter Data:** The authors acknowledge the unique challenges posed by Twitter's data, including the brevity of tweets, the rapid evolution of language and terminology, and the deviation from standard prose.
