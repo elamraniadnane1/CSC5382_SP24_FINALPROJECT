@@ -49,21 +49,60 @@ Maximizing ROI: By improving the accuracy of sentiment analysis, the model aids 
 
 ## Data Requirements
 
-A large and diverse dataset of text data, including social media posts, news articles, and transcripts of political speeches and debates.
-The data should cover a wide range of political topics, demographics, and geographical locations to ensure representativeness.
-Data should be annotated with reliable sentiment labels, either manually or through a semi-automated process with human oversight.
-Access to historical election data, polling results, and demographic information for model training and contextual understanding.
-
+- **Source Diversity:** A large and diverse dataset of text data from Twitter, encompassing social media posts, news articles, and transcripts of political speeches and debates.
+- **Broad Coverage:** The data should cover a wide range of political topics, demographics, and geographical locations to ensure representativeness.
+- **Sentiment Labeling:** Data should be annotated with reliable sentiment labels, either manually or through a semi-automated process with human oversight.
+- **Historical and Contextual Data:** Access to historical election data, polling results, and demographic information for model training and contextual understanding.
 
 
 ## Feasibility including specification of a baseline
 
-The baselines are NLP models on sentiment analysis tasks, such as SVM or Naive Bayes classifiers, before the introduction of BERT. 
+![image](https://github.com/elamraniadnane1/SP24/assets/46249118/fdbd04f5-2243-4fec-8e35-4c7235da4a1b)
 
-For details about the baseline and its datasets please consult as well as the model card below:
-https://huggingface.co/kornosk
-https://github.com/GU-DataLab/stance-detection-KE-MLM
-https://aclanthology.org/2021.naacl-main.376/
+## Sentiment Analysis Overview
+
+### Deep Learning Methods
+- **BERT:** Falls under the "Deep Learning" category within "Sentiment Analysis", considered alongside neural network-based approaches such as:
+  - CNN (Convolutional Neural Network)
+  - RNN (Recurrent Neural Network)
+  - LSTM (Long Short-Term Memory)
+- **Applications:** BERT is suitable for sentiment analysis and can potentially be used for social network analysis to understand communication contexts within a network.
+
+### Volumetric Analysis
+- **Description:** Predicts election outcomes based on the volume of mentions or activity related to a candidate or party, assuming that more mentions correlate with higher popularity or potential electoral success.
+
+### Sentiment Analysis Approaches
+- **Process:** Computational determination of whether text is positive, negative, or neutral, used to gauge public opinion from text data on various platforms.
+
+### Lexicon-Based Methods
+- **Dictionary:** Simple form where words are tagged as positive or negative.
+- **Statistical:** Uses statistical techniques to assign sentiment scores based on word co-occurrence frequencies.
+- **Sentiword:** Likely refers to SentiWordNet, assigning sentiment scores of positivity, negativity, and objectivity to each WordNet synset.
+
+### Machine Learning Methods
+- **Supervised Learning:** Predicts sentiment of new texts using labeled datasets.
+  - Support Vector Machine (SVM)
+  - Naive Bayes
+  - Decision Tree
+- **Unsupervised Learning:** Finds patterns without pre-labeled responses.
+  - K-Means
+  - KNN (k-Nearest Neighbors)
+
+### Deep Learning Methods
+- **CNN (Convolutional Neural Network):** Used for image recognition and sentence classification in NLP.
+- **RNN (Recurrent Neural Network):** Suitable for sequence prediction due to its internal state (memory).
+- **LSTM (Long Short-Term Memory):** Capable of learning long-term dependencies, effective for sequences in tasks like time series analysis or NLP.
+
+### Social Network Analysis
+- **Definition:** Uses network and graph theories to understand social structures, such as how information spreads through networks and the influence of various actors within a social network for election prediction.
+
+- **Baseline Models:** The baselines are NLP models on sentiment analysis tasks, such as SVM or Naive Bayes classifiers, before the introduction of BERT.
+- **Additional Resources and Details:**
+  - For more details about the baseline and its datasets, please consult the following links:
+    - [Hugging Face - kornosk](https://huggingface.co/kornosk)
+    - [GitHub - GU-DataLab/stance-detection-KE-MLM](https://github.com/GU-DataLab/stance-detection-KE-MLM)
+    - [ACL Anthology - Knowledge Enhanced Masked Language Model for Stance Detection](https://aclanthology.org/2021.naacl-main.376/)
+
 
 ## Providing arguments for my choice (e.g., published state of the art results, give credit to the authors)**
 
