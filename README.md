@@ -1,5 +1,7 @@
 # SPRING2024_PROJECT_MODELCARD_ARTIFICIALINTELLIGENCE_FOR_DIGITAL_TRANSFORMATION
 
+### US ELECTIONS 2024 RESULTS PREDICTION
+
 # By : Adnane El Amrani
 
 ## Table of Contents
@@ -252,5 +254,5 @@ print("Neutral:", predicted_probability[2])
 - [ResearchGate - Biden vs. Trump: Modelling US General Elections using BERT Language Model](https://www.researchgate.net/publication/354427394_Biden_vs_Trump_Modelling_US_general_elections_using_BERT_language_model)
 - [Hugging Face Model Repository - kornosk/bert-election2020-twitter-stance-biden-KE-MLM](https://huggingface.co/kornosk/bert-election2020-twitter-stance-biden-KE-MLM)
 - [Papers With Code - Knowledge-Enhanced Masked Language Model for Stance Detection](https://paperswithcode.com/paper/knowledge-enhanced-masked-language-model-for)
-
+- [Retraining a BERT Model for Transfer Learning in Requirements Engineering: A Preliminary Study](https://www.researchgate.net/publication/365112611_Retraining_a_BERT_Model_for_Transfer_Learning_in_Requirements_Engineering_A_Preliminary_Study)
 
