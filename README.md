@@ -188,9 +188,9 @@ print("Neutral:", predicted_probability[2])
 
 ```
 
-**Datasets are uploaded in the same branch of this GitHub Link, other Datasets will be WebScrapped using a specific tool : TwExtract**
+## Datasets are uploaded in the same branch of this GitHub Link, other Datasets will be WebScrapped using a specific tool : TwExtract**
 
-**Metrics for Business Goal Evaluation**
+## Metrics for Business Goal Evaluation
 
 - **Accuracy of Election Outcome Prediction:** The model's accuracy in predicting election outcomes compared to actual results.
 - **Stance Detection Accuracy and Organization Satisfaction:** How accurately the model detects stances, and the satisfaction level of organizations using it.
@@ -200,7 +200,7 @@ print("Neutral:", predicted_probability[2])
 - **Improvement Over Baselines:** The degree to which the new model outperforms existing models and baselines, indicating the added value of the new approach.
 
 
-**Other References**
+## Other References
 
 - [IEEE Xplore - [Paper Title or Description]](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9530657)
 - [ResearchGate - Biden vs. Trump: Modelling US General Elections using BERT Language Model](https://www.researchgate.net/publication/354427394_Biden_vs_Trump_Modelling_US_general_elections_using_BERT_language_model)
