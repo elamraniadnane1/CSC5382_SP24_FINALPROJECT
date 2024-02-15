@@ -236,6 +236,74 @@ print("Neutral:", predicted_probability[2])
 
 ```
 
+To retrain the BERT model for the 2024 elections, we will need to follow a process similar to the one described earlier but with updated data relevant to the 2024 election context. Here's a Python notebook template that you can use as a starting point. Please note that the success of retraining largely depends on the quality and relevance of your new dataset.
+
+```python
+
+# Import necessary libraries
+import torch
+import pandas as pd
+from transformers import BertTokenizer, BertForSequenceClassification, AdamW
+from torch.utils.data import DataLoader, RandomSampler, SequentialSampler, TensorDataset, random_split
+from sklearn.metrics import classification_report
+
+# Load 2024 election dataset
+# Ensure your dataset.csv for 2024 elections has 'text' for the tweet and 'label' for the stance
+df = pd.read_csv('2024_election_dataset.csv')
+
+# Preprocess and tokenize data
+tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+tokenized_data = df['text'].apply(lambda x: tokenizer.encode(x, add_special_tokens=True))
+input_ids = torch.tensor(tokenized_data.tolist())
+labels = torch.tensor(df['label'].values)
+
+# Create a DataLoader
+dataset = TensorDataset(input_ids, labels)
+train_size = int(0.9 * len(dataset))
+val_size = len(dataset) - train_size
+train_dataset, val_dataset = random_split(dataset, [train_size, val_size])
+batch_size = 32
+
+train_dataloader = DataLoader(train_dataset, sampler=RandomSampler(train_dataset), batch_size=batch_size)
+validation_dataloader = DataLoader(val_dataset, sampler=SequentialSampler(val_dataset), batch_size=batch_size)
+
+# Load pre-trained BERT model for sequence classification
+model = BertForSequenceClassification.from_pretrained("bert-base-uncased", num_labels=3)  # Assuming 3 stance categories
+
+# Fine-tune BERT
+optimizer = AdamW(model.parameters(), lr=2e-5, eps=1e-8)
+epochs = 4
+for epoch in range(epochs):
+    model.train()
+    for step, batch in enumerate(train_dataloader):
+        b_input_ids, b_labels = batch
+        model.zero_grad()
+        outputs = model(b_input_ids, labels=b_labels)
+        loss = outputs[0]
+        loss.backward()
+        optimizer.step()
+
+    # Evaluate the model
+    model.eval()
+    predictions, true_labels = [], []
+    for batch in validation_dataloader:
+        batch = tuple(t.to('cpu') for t in batch)
+        b_input_ids, b_labels = batch
+        with torch.no_grad():
+            outputs = model(b_input_ids)
+        logits = outputs[0]
+        logits = logits.detach().cpu().numpy()
+        label_ids = b_labels.to('cpu').numpy()
+        predictions.append(logits)
+        true_labels.append(label_ids)
+
+# Calculate accuracy and print classification report
+flat_predictions = [item for sublist in predictions for item in sublist]
+flat_predictions = np.argmax(flat_predictions, axis=1).flatten()
+flat_true_labels = [item for sublist in true_labels for item in sublist]
+print(classification_report(flat_true_labels, flat_predictions))
+```
+
 ## Datasets are uploaded in the same branch of this GitHub Link, other Datasets will be WebScrapped using a specific tool : TwExtract**
 
 ## Metrics for Business Goal Evaluation
