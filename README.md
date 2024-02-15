@@ -149,23 +149,30 @@ The following paper inspired me to improve the used method and consequently make
 - **Combined Application:** Advanced NLP systems may perform both tasks together to gain a comprehensive understanding of text data, using sentiment analysis to capture the emotional tone and stance detection to understand the position towards the subject matter.
 
 
+## Model Card for the Baseline
 
-## Model Card for the Baseline, after getting inspired from Huggingface model cards
+Inspired by Huggingface model cards, this section provides details about the pre-trained BERT model used as the baseline for stance detection in the context of the 2020 US Presidential Election.
 
-Pre-trained BERT on Twitter US Election 2020 for Stance Detection towards Joe Biden (KE-MLM)
-Pre-trained weights for KE-MLM model in Knowledge Enhance Masked Language Model for Stance Detection, NAACL 2021.
+### Model Overview
+- **Model Name:** KE-MLM (Knowledge Enhanced Masked Language Model)
+- **Source Paper:** "Knowledge Enhance Masked Language Model for Stance Detection, NAACL 2021"
 
-Training Data
-This model is pre-trained on over 5 million English tweets about the 2020 US Presidential Election. Then fine-tuned using our stance-labeled data for stance detection towards Joe Biden.
+### Training Data
+- **Dataset Size:** The model is pre-trained on over 5 million English tweets.
+- **Context:** The tweets pertain to the 2020 US Presidential Election.
+- **Fine-Tuning:** Further refined with stance-labeled data specifically for detecting stance towards Joe Biden.
 
-Training Objective
-This model is initialized with BERT-base and trained with normal MLM objective with classification layer fine-tuned for stance detection towards Joe Biden.
+### Training Objective
+- **Initialization:** BERT-base is utilized as the starting point.
+- **MLM Objective:** Trained with the normal MLM (Masked Language Model) objective.
+- **Fine-Tuning Detail:** The classification layer is fine-tuned for stance detection towards Joe Biden.
 
-Usage
-This pre-trained language model is fine-tuned to the stance detection task specifically for Joe Biden.
+### Usage
+- **Application:** This language model is specifically fine-tuned for the stance detection task concerning Joe Biden.
 
-*Link the the model files*
-https://huggingface.co/kornosk/bert-election2020-twitter-stance-biden/tree/main
+### Accessing the Model
+- **Model Files:** To access the model files, visit the Hugging Face repository at [kornosk/bert-election2020-twitter-stance-biden](https://huggingface.co/kornosk/bert-election2020-twitter-stance-biden/tree/main).
+
 
 ## Sample Code 
 ```python
