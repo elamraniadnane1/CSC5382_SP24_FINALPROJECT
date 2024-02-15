@@ -34,18 +34,18 @@ Maximizing ROI: By improving the accuracy of sentiment analysis, the model aids 
 
 ## ML Framing
 
-**Project Archetype : Sentiment Analysis and Stance Detection in Political Context**
+***Project Archetype: Sentiment Analysis and Stance Detection in Political Context***
+- **Model Name:** AI-2024-US-Election-Sentiment-Analyzer
+- **Goal:** Adapt and enhance the existing 2020 election sentiment analysis model for the 2024 US Elections.
+- **Model Type:** Sentiment Analysis using pre-trained BERT.
+- **Primary Use:** Analysis of public sentiment in tweets related to US Elections 2024.
+- **Language:** English.
+- **Region of Application:** United States (Not applicable for Morocco).
+- **Architecture:** Based on BERT (Bidirectional Encoder Representations from Transformers).
+- **Training Dataset:** Over 10 million English tweets regarding US political discussions, specifically filtered for US Elections 2024 topics.
+- **Target Audience:** Political analysts, campaign strategists, digital marketers, and researchers.
+- **Use Cases:** Predicting election outcomes, analyzing public opinion trends, enhancing targeted political campaigning.
 
-•	AI-2024-US-Election-Sentiment-Analyzer Goal: Adapt and enhance the existing 2020 election sentiment analysis model for the 2024 US Elections.
-•	Model Description Model Name: AI-2024-US-Election-Sentiment-Analyzer 
-•	Model Type: Sentiment Analysis using pre-trained BERT. 
-•	Primary Use: Analysis of public sentiment in tweets related to US Elections 2024
-•	Language: English
-•	Region of Application: United States (Not applicable for Morocco)
-•	Architecture: Based on BERT (Bidirectional Encoder Representations from Transformers)
-•	Training Dataset: Over 10 million English tweets regarding US political discussions, specifically filtered for US Elections 2024 topics.
-•	Target Audience: Political analysts, campaign strategists, digital marketers, and researchers
-•	Use Cases: Predicting election outcomes, analyzing public opinion trends, enhancing targeted political campaigning.
 
 ## Data Requirements
 
