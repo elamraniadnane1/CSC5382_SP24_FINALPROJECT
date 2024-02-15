@@ -104,7 +104,7 @@ Maximizing ROI: By improving the accuracy of sentiment analysis, the model aids 
     - [ACL Anthology - Knowledge Enhanced Masked Language Model for Stance Detection](https://aclanthology.org/2021.naacl-main.376/)
 
 
-## Providing arguments for my choice (e.g., published state of the art results, give credit to the authors)**
+## Choice Justification
 
 The following paper inspired me to improve the used method and consequently make such a choice. The paper, ["Knowledge Enhanced Masked Language Model for Stance Detection"](https://aclanthology.org/2021.naacl-main.376/) by Kornraphop Kawintiranon and Lisa Singh, presented a novel approach to improve stance detection in tweets related to political entities, specifically in the context of the 2020 US Presidential election. Both the binary of the trained model and the notebook to retrain are available.
 
