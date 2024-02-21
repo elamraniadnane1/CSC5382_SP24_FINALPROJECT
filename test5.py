@@ -15,3 +15,4 @@ script_directory = os.path.dirname(os.path.realpath(__file__))
 
 # Unzip the file in the script's directory
 unzip_file(zip_file_path, script_directory)
+# Unzip the file in the script's directory
