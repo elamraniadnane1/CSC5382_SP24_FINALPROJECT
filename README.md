@@ -37,8 +37,8 @@ Maximizing ROI: By improving the accuracy of sentiment analysis, the model aids 
 ## ML Framing
 
 ***Project Archetype: Sentiment Analysis and Stance Detection in Political Context***
-- **Model Name:** AI-2024-US-Election-Sentiment-Analyzer
-- **Goal:** Adapt and enhance the existing 2020 election sentiment analysis model for the 2024 US Elections.
+- **Model Name:** AI-2024-US-Election-Sentiment/Stance-Analyzer
+- **Goal:** Adapt and enhance the existing 2020 election sentiment & stance analysis model for the 2024 US Elections.
 - **Model Type:** Sentiment Analysis using pre-trained BERT.
 - **Primary Use:** Analysis of public sentiment in tweets related to US Elections 2024.
 - **Language:** English.
