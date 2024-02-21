@@ -1,3 +1,4 @@
 /home/dino/Documents/SP24/models filter=lfs diff=lfs merge=lfs -text
-bert_model/python_model.pkl filter=lfs diff=lfs merge=lfs -text
+/home/dino/Documents/SP24 filter=lfs diff=lfs merge=lfs -text
 models/bert-election2020-twitter-stance-biden/model.safetensors filter=lfs diff=lfs merge=lfs -text
+bert_model/python_model.pkl filter=lfs diff=lfs merge=lfs -text
