@@ -1,0 +1,15 @@
+artifact_uri: file:///home/dino/Documents/SP24/mlruns/648181244491343986/7f8f1e133a4f40eeb6a09e82fb71e754/artifacts
+end_time: 1708596007777
+entry_point_name: ''
+experiment_id: '648181244491343986'
+lifecycle_stage: active
+run_id: 7f8f1e133a4f40eeb6a09e82fb71e754
+run_name: salty-perch-628
+run_uuid: 7f8f1e133a4f40eeb6a09e82fb71e754
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1708596002184
+status: 3
+tags: []
+user_id: dino
