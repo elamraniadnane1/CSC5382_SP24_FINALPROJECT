@@ -1,0 +1,16 @@
+artifact_uri: file:///home/dino/Documents/SP24/mlruns/0/1eb1feb0161f42ac9f511aa42512ee69/artifacts
+deleted_time: 1709063192783
+end_time: 1709056278783
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 1eb1feb0161f42ac9f511aa42512ee69
+run_name: thoughtful-sheep-979
+run_uuid: 1eb1feb0161f42ac9f511aa42512ee69
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1709056278761
+status: 4
+tags: []
+user_id: dino

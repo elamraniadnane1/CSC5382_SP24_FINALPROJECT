@@ -1,0 +1,16 @@
+artifact_uri: file:///home/dino/Documents/SP24/mlruns/0/8eb3cebdd4fa46ba965b06106abbef92/artifacts
+deleted_time: 1709063192770
+end_time: 1709061369691
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 8eb3cebdd4fa46ba965b06106abbef92
+run_name: learned-kit-675
+run_uuid: 8eb3cebdd4fa46ba965b06106abbef92
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1709061344419
+status: 3
+tags: []
+user_id: dino

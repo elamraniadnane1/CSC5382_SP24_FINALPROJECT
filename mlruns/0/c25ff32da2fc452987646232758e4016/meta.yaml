@@ -1,8 +1,9 @@
 artifact_uri: file:///home/dino/Documents/SP24/mlruns/0/c25ff32da2fc452987646232758e4016/artifacts
+deleted_time: 1709063192790
 end_time: 1709026803652
 entry_point_name: ''
 experiment_id: '0'
-lifecycle_stage: active
+lifecycle_stage: deleted
 run_id: c25ff32da2fc452987646232758e4016
 run_name: suave-mink-772
 run_uuid: c25ff32da2fc452987646232758e4016

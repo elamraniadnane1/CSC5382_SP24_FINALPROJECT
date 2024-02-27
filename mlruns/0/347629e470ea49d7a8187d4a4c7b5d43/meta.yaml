@@ -1,0 +1,16 @@
+artifact_uri: file:///home/dino/Documents/SP24/mlruns/0/347629e470ea49d7a8187d4a4c7b5d43/artifacts
+deleted_time: 1709063192776
+end_time: 1709061148352
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 347629e470ea49d7a8187d4a4c7b5d43
+run_name: abundant-jay-105
+run_uuid: 347629e470ea49d7a8187d4a4c7b5d43
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1709061148340
+status: 4
+tags: []
+user_id: dino
