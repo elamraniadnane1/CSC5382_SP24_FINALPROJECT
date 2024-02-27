@@ -1,4 +1,9 @@
 /home/dino/Documents/SP24/models filter=lfs diff=lfs merge=lfs -text
 /home/dino/Documents/SP24 filter=lfs diff=lfs merge=lfs -text
 models/bert-election2020-twitter-stance-biden/model.safetensors filter=lfs diff=lfs merge=lfs -text
+/home/dino/Documents/SP24/.git/lfs/objects/43/c3/43c3a2e8153c5fc1d4095565cabae188074122582c173b90f3c6f30632ec41f4 filter=lfs diff=lfs merge=lfs -text
+/home/dino/Documents/SP24/.git/objects/b9/bbf1a6a22a68bb2342a0389fdbc5bc77dc928c filter=lfs diff=lfs merge=lfs -text
+/home/dino/Documents/SP24/.git/objects/dd/9e0b74131a1807d292c35c141a460713c18c78 filter=lfs diff=lfs merge=lfs -text
+/home/dino/Documents/SP24/models/bert-election2020-twitter-stance-biden/model.safetensors filter=lfs diff=lfs merge=lfs -text
+/home/dino/Documents/SP24/bert_model/python_model.pkl filter=lfs diff=lfs merge=lfs -text
 bert_model/python_model.pkl filter=lfs diff=lfs merge=lfs -text
