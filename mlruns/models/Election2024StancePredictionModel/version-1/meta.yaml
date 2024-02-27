@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1709034913343
+current_stage: Staging
+description: null
+last_updated_timestamp: 1709035960399
+name: Election2024StancePredictionModel
+run_id: 35fb42b2843a423ba5990c1b3512bb2a
+run_link: null
+source: file:///home/dino/Desktop/SP24/mlruns/185790003142579820/35fb42b2843a423ba5990c1b3512bb2a/artifacts/model
+status: READY
+status_message: null
+storage_location: file:///home/dino/Desktop/SP24/mlruns/185790003142579820/35fb42b2843a423ba5990c1b3512bb2a/artifacts/model
+user_id: null
+version: 1

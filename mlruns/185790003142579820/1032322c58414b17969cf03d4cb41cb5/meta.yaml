@@ -1,0 +1,15 @@
+artifact_uri: file:///home/dino/Desktop/SP24/mlruns/185790003142579820/1032322c58414b17969cf03d4cb41cb5/artifacts
+end_time: 1709032950501
+entry_point_name: ''
+experiment_id: '185790003142579820'
+lifecycle_stage: active
+run_id: 1032322c58414b17969cf03d4cb41cb5
+run_name: secretive-cub-919
+run_uuid: 1032322c58414b17969cf03d4cb41cb5
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1709032911285
+status: 3
+tags: []
+user_id: dino

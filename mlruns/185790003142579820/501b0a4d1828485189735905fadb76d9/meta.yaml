@@ -1,0 +1,15 @@
+artifact_uri: file:///home/dino/Desktop/SP24/mlruns/185790003142579820/501b0a4d1828485189735905fadb76d9/artifacts
+end_time: 1709043757830
+entry_point_name: ''
+experiment_id: '185790003142579820'
+lifecycle_stage: active
+run_id: 501b0a4d1828485189735905fadb76d9
+run_name: capable-perch-908
+run_uuid: 501b0a4d1828485189735905fadb76d9
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1709043713656
+status: 3
+tags: []
+user_id: dino
