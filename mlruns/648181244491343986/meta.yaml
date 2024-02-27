@@ -1,6 +1,7 @@
 artifact_location: file:///home/dino/Documents/SP24/mlruns/648181244491343986
 creation_time: 1708595679946
 experiment_id: '648181244491343986'
-last_update_time: 1708595679946
+last_update_time: 1709016292135
 lifecycle_stage: active
-name: HuggingFace Model Prediction
+name: Milestone 2_bis
+tags: {}
