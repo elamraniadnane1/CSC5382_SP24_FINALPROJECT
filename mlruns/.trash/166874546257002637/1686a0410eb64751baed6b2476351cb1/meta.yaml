@@ -1,0 +1,16 @@
+artifact_uri: file:///home/dino/Documents/SP24/mlruns/166874546257002637/1686a0410eb64751baed6b2476351cb1/artifacts
+deleted_time: 1709050780309
+end_time: 1708594333679
+entry_point_name: ''
+experiment_id: '166874546257002637'
+lifecycle_stage: deleted
+run_id: 1686a0410eb64751baed6b2476351cb1
+run_name: aged-skunk-167
+run_uuid: 1686a0410eb64751baed6b2476351cb1
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1708594333651
+status: 3
+tags: []
+user_id: dino

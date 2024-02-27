@@ -4,9 +4,12 @@ from collections import defaultdict
 
 def run_command(command):
     try:
-        subprocess.check_call(command, shell=True)
+        subprocess.check_call(command, shell=False)
     except subprocess.CalledProcessError as e:
         print(f"Error executing command: {e}")
+        return False
+    except OSError as e:
+        print(f"OS Error: {e}")
         return False
     return True
 
@@ -28,14 +31,18 @@ def get_extensions_of_large_files(large_files):
     return extensions
 
 def has_changes_to_commit():
-    status = subprocess.check_output("git status --porcelain", shell=True).strip()
-    return len(status) != 0
+    try:
+        status = subprocess.check_output(["git", "status", "--porcelain"]).strip().decode('utf-8')
+        return len(status) != 0
+    except subprocess.CalledProcessError as e:
+        print(f"Error checking git status: {e}")
+        return False
 
 def main():
     repo_path = "/home/dino/Desktop/SP24"
     
     # Initialize Git LFS
-    if not run_command("git lfs install"):
+    if not run_command(["git", "lfs", "install"]):
         return
 
     # Change directory to the repo
@@ -47,28 +54,28 @@ def main():
 
     # Track large files by extension
     for ext in extensions:
-        if not run_command(f"git lfs track '*{ext}'"):
+        if not run_command(["git", "lfs", "track", f"*{ext}"]):
             return
 
     # Re-add all files to ensure they are correctly tracked by LFS
-    if not run_command("git add --renormalize ."):
+    if not run_command(["git", "add", "--renormalize", "."]):
         return
 
     # Add all changes including large files
-    if not run_command("git add ."):
+    if not run_command(["git", "add", "."]):
         return
     
     # Check if there are changes to commit
     if has_changes_to_commit():
         # Commit changes
         commit_message = "Update with large file handling"
-        if not run_command(f"git commit -m '{commit_message}'"):
+        if not run_command(["git", "commit", "-m", commit_message]):
             return
     else:
         print("No changes to commit.")
     
     # Push changes to the remote repository
-    if not run_command("git push"):
+    if not run_command(["git", "push"]):
         return
 
     print("Changes have been successfully pushed to the repository.")

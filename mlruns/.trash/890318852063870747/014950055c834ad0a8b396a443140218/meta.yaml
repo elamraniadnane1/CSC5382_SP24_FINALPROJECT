@@ -1,0 +1,16 @@
+artifact_uri: file:///home/dino/Desktop/SP24/mlruns/890318852063870747/014950055c834ad0a8b396a443140218/artifacts
+deleted_time: 1709050791743
+end_time: 1709050595774
+entry_point_name: ''
+experiment_id: '890318852063870747'
+lifecycle_stage: deleted
+run_id: 014950055c834ad0a8b396a443140218
+run_name: capable-auk-759
+run_uuid: 014950055c834ad0a8b396a443140218
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1709050567151
+status: 4
+tags: []
+user_id: dino

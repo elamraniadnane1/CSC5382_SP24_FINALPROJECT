@@ -1,0 +1,7 @@
+artifact_location: file:///home/dino/Desktop/SP24/mlruns/890318852063870747
+creation_time: 1709050567140
+experiment_id: '890318852063870747'
+last_update_time: 1709050791743
+lifecycle_stage: deleted
+name: HuggingFace_BERT_Exp
+tags: {}

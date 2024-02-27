@@ -1,0 +1,16 @@
+artifact_uri: file:///home/dino/Documents/SP24/mlruns/648181244491343986/7aa1da22e92c405ea295882e86a1c911/artifacts
+deleted_time: 1709050785970
+end_time: 1708595707932
+entry_point_name: ''
+experiment_id: '648181244491343986'
+lifecycle_stage: deleted
+run_id: 7aa1da22e92c405ea295882e86a1c911
+run_name: honorable-lark-637
+run_uuid: 7aa1da22e92c405ea295882e86a1c911
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1708595680352
+status: 4
+tags: []
+user_id: dino
