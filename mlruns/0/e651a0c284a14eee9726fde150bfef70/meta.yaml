@@ -1,0 +1,16 @@
+artifact_uri: file:///home/dino/Documents/SP24/mlruns/0/e651a0c284a14eee9726fde150bfef70/artifacts
+deleted_time: 1709076281479
+end_time: 1709075569416
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: e651a0c284a14eee9726fde150bfef70
+run_name: glamorous-fawn-792
+run_uuid: e651a0c284a14eee9726fde150bfef70
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1709075565516
+status: 4
+tags: []
+user_id: dino

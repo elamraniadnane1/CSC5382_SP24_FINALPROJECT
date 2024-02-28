@@ -1,0 +1,16 @@
+artifact_uri: file:///home/dino/Documents/SP24/mlruns/0/70153d2220e645a597bb074e628debdc/artifacts
+deleted_time: 1709079721072
+end_time: null
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 70153d2220e645a597bb074e628debdc
+run_name: enchanting-foal-460
+run_uuid: 70153d2220e645a597bb074e628debdc
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1709075832107
+status: 1
+tags: []
+user_id: dino

@@ -1,0 +1,16 @@
+artifact_uri: file:///home/dino/Documents/SP24/mlruns/0/d58691880cb740508b54a43523c0da47/artifacts
+deleted_time: 1709073057133
+end_time: 1709072986374
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: d58691880cb740508b54a43523c0da47
+run_name: adorable-snake-388
+run_uuid: d58691880cb740508b54a43523c0da47
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1709072968632
+status: 3
+tags: []
+user_id: dino

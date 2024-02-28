@@ -1,0 +1,16 @@
+artifact_uri: file:///home/dino/Documents/SP24/mlruns/0/2efb0487ae1f497dbea2875ebabdb411/artifacts
+deleted_time: 1709076281487
+end_time: 1709073485874
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 2efb0487ae1f497dbea2875ebabdb411
+run_name: adorable-snail-328
+run_uuid: 2efb0487ae1f497dbea2875ebabdb411
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1709073460909
+status: 3
+tags: []
+user_id: dino
