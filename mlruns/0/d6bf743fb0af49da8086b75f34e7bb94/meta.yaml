@@ -1,0 +1,15 @@
+artifact_uri: file:///home/dino/Documents/SP24/mlruns/0/d6bf743fb0af49da8086b75f34e7bb94/artifacts
+end_time: 1709091512328
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: d6bf743fb0af49da8086b75f34e7bb94
+run_name: abundant-sow-423
+run_uuid: d6bf743fb0af49da8086b75f34e7bb94
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1709087639747
+status: 3
+tags: []
+user_id: dino
