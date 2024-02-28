@@ -1,0 +1,16 @@
+artifact_uri: file:///home/dino/Documents/SP24/mlruns/0/47ac14a3fc1e473da6dba3d57b48e2fa/artifacts
+deleted_time: 1709084095554
+end_time: null
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 47ac14a3fc1e473da6dba3d57b48e2fa
+run_name: rare-grub-801
+run_uuid: 47ac14a3fc1e473da6dba3d57b48e2fa
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1709079938828
+status: 1
+tags: []
+user_id: dino
