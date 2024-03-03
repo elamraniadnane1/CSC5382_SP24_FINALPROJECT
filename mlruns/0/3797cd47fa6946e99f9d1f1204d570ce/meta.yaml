@@ -1,0 +1,16 @@
+artifact_uri: file:///home/dino/Documents/SP24/mlruns/0/3797cd47fa6946e99f9d1f1204d570ce/artifacts
+deleted_time: 1709498591285
+end_time: 1709496447282
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 3797cd47fa6946e99f9d1f1204d570ce
+run_name: indecisive-shark-795
+run_uuid: 3797cd47fa6946e99f9d1f1204d570ce
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1709496407538
+status: 4
+tags: []
+user_id: dino

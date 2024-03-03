@@ -1,8 +1,9 @@
 artifact_uri: file:///home/dino/Documents/SP24/mlruns/0/e332a567647a48218577f2760d8fdb4f/artifacts
+deleted_time: 1709498591429
 end_time: 1709125146753
 entry_point_name: ''
 experiment_id: '0'
-lifecycle_stage: active
+lifecycle_stage: deleted
 run_id: e332a567647a48218577f2760d8fdb4f
 run_name: thoughtful-vole-659
 run_uuid: e332a567647a48218577f2760d8fdb4f

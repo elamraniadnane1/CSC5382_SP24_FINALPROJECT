@@ -1,8 +1,9 @@
 artifact_uri: file:///home/dino/Documents/SP24/mlruns/0/bdb7de138f6944f1a50bda26444acf4c/artifacts
+deleted_time: 1709498591305
 end_time: 1709123242090
 entry_point_name: ''
 experiment_id: '0'
-lifecycle_stage: active
+lifecycle_stage: deleted
 run_id: bdb7de138f6944f1a50bda26444acf4c
 run_name: stylish-asp-524
 run_uuid: bdb7de138f6944f1a50bda26444acf4c

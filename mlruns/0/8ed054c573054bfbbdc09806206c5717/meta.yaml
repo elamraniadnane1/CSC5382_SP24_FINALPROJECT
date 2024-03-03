@@ -1,0 +1,15 @@
+artifact_uri: file:///home/dino/Documents/SP24/mlruns/0/8ed054c573054bfbbdc09806206c5717/artifacts
+end_time: 1709505952723
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 8ed054c573054bfbbdc09806206c5717
+run_name: sneaky-hound-141
+run_uuid: 8ed054c573054bfbbdc09806206c5717
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1709496499039
+status: 3
+tags: []
+user_id: dino
