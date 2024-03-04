@@ -1,0 +1,15 @@
+artifact_uri: file:///home/dino/Documents/SP24/mlruns/0/a0cbf376cdc2427e823c98b3b8b90412/artifacts
+end_time: 1709561539411
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: a0cbf376cdc2427e823c98b3b8b90412
+run_name: abundant-crow-783
+run_uuid: a0cbf376cdc2427e823c98b3b8b90412
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1709561525696
+status: 4
+tags: []
+user_id: dino

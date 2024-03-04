@@ -145,6 +145,7 @@ with mlflow.start_run() as run:
 
     print("Reading and processing the dataset...")
     df = pd.read_csv(CSV_FILE_PATH)
+    
 
     # Generate statistics using TensorFlow Data Validation
     stats = generate_statistics(df)
