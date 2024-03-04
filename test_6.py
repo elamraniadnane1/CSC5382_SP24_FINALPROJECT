@@ -12,6 +12,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from torch.optim import AdamW
 import tensorflow_data_validation as tfdv
+import subprocess
 
 
 print("Welcome to the Stance Detection Model Training!")
@@ -19,6 +20,37 @@ print("Welcome to the Stance Detection Model Training!")
 # Define the path to the model files and the CSV file
 CSV_FILE_PATH = '/home/dino/Desktop/SP24/biden_stance_train_public.csv'
 pretrained_LM_path = '/home/dino/Desktop/SP24/bert-election2020-twitter-stance-biden'
+
+# Define function to run shell commands
+def run_command(command):
+    process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    stdout, stderr = process.communicate()
+    if process.returncode != 0:
+        print(f"Error: {stderr}")
+    return stdout.decode().strip()
+
+# Initialize Git repository
+print("Initializing Git repository...")
+run_command("git init")
+
+# Enable Git LFS for large files
+print("Enabling Git LFS for large files...")
+run_command("git lfs install")
+# Add large files to track with Git LFS
+run_command("git lfs track '*.pt'")  # Tracking PyTorch model files
+run_command("git lfs track '*.csv'")  # Tracking large CSV datasets
+
+# Add .gitattributes to the staging area
+run_command("git add .gitattributes")
+
+# Add and commit changes
+def commit_changes(commit_message):
+    run_command("git add .")
+    run_command(f"git commit -m '{commit_message}'")
+
+# Push changes to remote repository
+def push_to_remote(remote_name, branch_name):
+    run_command(f"git push {remote_name} {branch_name}")
 
 
 
@@ -283,4 +315,10 @@ with mlflow.start_run() as run:
     mlflow.pytorch.log_model(model, "model")
 
     print(f"Model training and evaluation completed. Model has been logged with run id: {run.info.run_id}")
-    print("Stance Detection Model Training Finished Successfully.")
+    print("Stance Detection Model Training Finished Successfully.")# Assuming model is saved as 'model.pth' and dataset is 'dataset.csv'
+    commit_changes("Add trained model and dataset")
+    # Push to remote repository
+    push_to_remote("origin", "main")
+
+    print("Git versioning completed.")
+        
