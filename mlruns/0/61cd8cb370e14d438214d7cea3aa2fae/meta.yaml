@@ -1,0 +1,15 @@
+artifact_uri: file:///home/dino/Documents/SP24/mlruns/0/61cd8cb370e14d438214d7cea3aa2fae/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 61cd8cb370e14d438214d7cea3aa2fae
+run_name: stately-dog-773
+run_uuid: 61cd8cb370e14d438214d7cea3aa2fae
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1709555887342
+status: 1
+tags: []
+user_id: dino

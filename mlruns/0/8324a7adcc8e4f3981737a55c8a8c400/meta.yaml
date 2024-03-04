@@ -1,0 +1,15 @@
+artifact_uri: file:///home/dino/Documents/SP24/mlruns/0/8324a7adcc8e4f3981737a55c8a8c400/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 8324a7adcc8e4f3981737a55c8a8c400
+run_name: upset-fly-993
+run_uuid: 8324a7adcc8e4f3981737a55c8a8c400
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1709555629530
+status: 1
+tags: []
+user_id: dino

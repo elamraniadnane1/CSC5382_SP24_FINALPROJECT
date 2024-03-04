@@ -1,0 +1,16 @@
+artifact_uri: file:///home/dino/Documents/SP24/mlruns/0/535a8d8ff81b4eebb2ea4153ff218a8a/artifacts
+deleted_time: 1709552142027
+end_time: 1709550736780
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 535a8d8ff81b4eebb2ea4153ff218a8a
+run_name: bedecked-sloth-78
+run_uuid: 535a8d8ff81b4eebb2ea4153ff218a8a
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1709550731445
+status: 4
+tags: []
+user_id: dino

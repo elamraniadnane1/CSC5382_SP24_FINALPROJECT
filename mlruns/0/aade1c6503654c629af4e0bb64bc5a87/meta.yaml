@@ -1,0 +1,16 @@
+artifact_uri: file:///home/dino/Documents/SP24/mlruns/0/aade1c6503654c629af4e0bb64bc5a87/artifacts
+deleted_time: 1709552141999
+end_time: 1709548445290
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: aade1c6503654c629af4e0bb64bc5a87
+run_name: delicate-goose-99
+run_uuid: aade1c6503654c629af4e0bb64bc5a87
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1709548429609
+status: 4
+tags: []
+user_id: dino

@@ -1,0 +1,16 @@
+artifact_uri: file:///home/dino/Documents/SP24/mlruns/0/093a9921dfd643baa191df93d478f106/artifacts
+deleted_time: 1709552142010
+end_time: 1709548722046
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 093a9921dfd643baa191df93d478f106
+run_name: rumbling-wolf-380
+run_uuid: 093a9921dfd643baa191df93d478f106
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1709548683190
+status: 4
+tags: []
+user_id: dino

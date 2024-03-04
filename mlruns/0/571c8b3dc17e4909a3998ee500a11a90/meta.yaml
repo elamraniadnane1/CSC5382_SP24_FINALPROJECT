@@ -1,0 +1,16 @@
+artifact_uri: file:///home/dino/Documents/SP24/mlruns/0/571c8b3dc17e4909a3998ee500a11a90/artifacts
+deleted_time: 1709552142023
+end_time: 1709550229198
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 571c8b3dc17e4909a3998ee500a11a90
+run_name: victorious-dog-448
+run_uuid: 571c8b3dc17e4909a3998ee500a11a90
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1709550225986
+status: 4
+tags: []
+user_id: dino

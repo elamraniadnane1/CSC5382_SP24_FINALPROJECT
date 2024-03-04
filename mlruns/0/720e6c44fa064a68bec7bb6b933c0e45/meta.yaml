@@ -1,0 +1,16 @@
+artifact_uri: file:///home/dino/Documents/SP24/mlruns/0/720e6c44fa064a68bec7bb6b933c0e45/artifacts
+deleted_time: 1709552142047
+end_time: 1709550849320
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 720e6c44fa064a68bec7bb6b933c0e45
+run_name: placid-snail-787
+run_uuid: 720e6c44fa064a68bec7bb6b933c0e45
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1709550845163
+status: 4
+tags: []
+user_id: dino

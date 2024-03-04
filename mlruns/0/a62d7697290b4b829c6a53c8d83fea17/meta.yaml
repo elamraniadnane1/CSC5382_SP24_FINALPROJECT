@@ -1,0 +1,16 @@
+artifact_uri: file:///home/dino/Documents/SP24/mlruns/0/a62d7697290b4b829c6a53c8d83fea17/artifacts
+deleted_time: 1709552142064
+end_time: 1709551144568
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: a62d7697290b4b829c6a53c8d83fea17
+run_name: gentle-dog-441
+run_uuid: a62d7697290b4b829c6a53c8d83fea17
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1709551141752
+status: 4
+tags: []
+user_id: dino

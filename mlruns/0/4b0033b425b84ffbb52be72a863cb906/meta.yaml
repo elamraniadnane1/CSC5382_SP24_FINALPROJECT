@@ -1,0 +1,16 @@
+artifact_uri: file:///home/dino/Documents/SP24/mlruns/0/4b0033b425b84ffbb52be72a863cb906/artifacts
+deleted_time: 1709552142045
+end_time: 1709550969152
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 4b0033b425b84ffbb52be72a863cb906
+run_name: worried-skunk-172
+run_uuid: 4b0033b425b84ffbb52be72a863cb906
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1709550966574
+status: 4
+tags: []
+user_id: dino
