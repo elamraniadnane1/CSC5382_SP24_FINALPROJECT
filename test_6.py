@@ -206,22 +206,26 @@ with mlflow.start_run() as run:
     input_ids = inputs["input_ids"]
     attention_mask = inputs["attention_mask"]
     labels = torch.tensor(mapped_labels).long()
-
-    # Creating a TensorDataset and splitting into train and validation sets
+    
+    # Creating a TensorDataset
     dataset = TensorDataset(input_ids, attention_mask, labels)
-    train_size = int(0.8 * len(dataset))
-    val_size = len(dataset) - train_size
-    train_dataset, val_dataset = random_split(dataset, [train_size, val_size])
+
+    # Splitting the dataset into train, validation, and test sets
+    total_size = len(dataset)
+    train_size = int(0.8 * total_size)
+    val_test_size = total_size - train_size
+    val_size = int(0.5 * val_test_size)
+    test_size = val_test_size - val_size
+
+    train_dataset, val_test_dataset = random_split(dataset, [train_size, val_test_size])
+    val_dataset, test_dataset = random_split(val_test_dataset, [val_size, test_size])
 
     # DataLoader creation
     train_loader = DataLoader(train_dataset, batch_size=hyperparams["batch_size"], shuffle=True)
     val_loader = DataLoader(val_dataset, batch_size=hyperparams["batch_size"])
-    
+    test_loader = DataLoader(test_dataset, batch_size=hyperparams["batch_size"])
 
-    print(f"Dataset split into {train_size} training and {val_size} validation samples. Creating DataLoaders.")
-
-    train_loader = DataLoader(train_dataset, batch_size=hyperparams["batch_size"], shuffle=True)
-    val_loader = DataLoader(val_dataset, batch_size=hyperparams["batch_size"])
+    print(f"Dataset split into {len(train_dataset)} training, {len(val_dataset)} validation, and {len(test_dataset)} test samples.")
 
     # Ensure all labels are valid
     if not all(label in label2id.values() for label in labels):
@@ -315,10 +319,12 @@ with mlflow.start_run() as run:
     mlflow.pytorch.log_model(model, "model")
 
     print(f"Model training and evaluation completed. Model has been logged with run id: {run.info.run_id}")
-    print("Stance Detection Model Training Finished Successfully.")# Assuming model is saved as 'model.pth' and dataset is 'dataset.csv'
+    print("Stance Detection Model Training Finished Successfully.")
+    # Assuming model is saved as 'model.pth' and dataset is 'dataset.csv'
+    torch.save(model.state_dict(), "model.pth")
+    df.to_csv("modified_dataset.csv", index=False)
     commit_changes("Add trained model and dataset")
     # Push to remote repository
     push_to_remote("origin", "main")
 
     print("Git versioning completed.")
-        
