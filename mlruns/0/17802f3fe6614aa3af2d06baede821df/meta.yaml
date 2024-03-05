@@ -1,8 +1,9 @@
 artifact_uri: file:///home/dino/Documents/SP24/mlruns/0/17802f3fe6614aa3af2d06baede821df/artifacts
+deleted_time: 1709566469610
 end_time: null
 entry_point_name: ''
 experiment_id: '0'
-lifecycle_stage: active
+lifecycle_stage: deleted
 run_id: 17802f3fe6614aa3af2d06baede821df
 run_name: puzzled-cat-947
 run_uuid: 17802f3fe6614aa3af2d06baede821df

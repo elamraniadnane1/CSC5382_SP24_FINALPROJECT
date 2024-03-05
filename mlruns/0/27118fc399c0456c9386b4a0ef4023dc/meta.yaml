@@ -1,8 +1,9 @@
 artifact_uri: file:///home/dino/Documents/SP24/mlruns/0/27118fc399c0456c9386b4a0ef4023dc/artifacts
+deleted_time: 1709566469592
 end_time: null
 entry_point_name: ''
 experiment_id: '0'
-lifecycle_stage: active
+lifecycle_stage: deleted
 run_id: 27118fc399c0456c9386b4a0ef4023dc
 run_name: capricious-duck-608
 run_uuid: 27118fc399c0456c9386b4a0ef4023dc

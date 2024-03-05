@@ -1,8 +1,9 @@
 artifact_uri: file:///home/dino/Documents/SP24/mlruns/0/a0cbf376cdc2427e823c98b3b8b90412/artifacts
+deleted_time: 1709566469575
 end_time: 1709561539411
 entry_point_name: ''
 experiment_id: '0'
-lifecycle_stage: active
+lifecycle_stage: deleted
 run_id: a0cbf376cdc2427e823c98b3b8b90412
 run_name: abundant-crow-783
 run_uuid: a0cbf376cdc2427e823c98b3b8b90412

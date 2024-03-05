@@ -1,8 +1,9 @@
 artifact_uri: file:///home/dino/Documents/SP24/mlruns/0/f531cbb7e73d45ff9ca02581e0408837/artifacts
+deleted_time: 1709566469621
 end_time: null
 entry_point_name: ''
 experiment_id: '0'
-lifecycle_stage: active
+lifecycle_stage: deleted
 run_id: f531cbb7e73d45ff9ca02581e0408837
 run_name: placid-yak-445
 run_uuid: f531cbb7e73d45ff9ca02581e0408837

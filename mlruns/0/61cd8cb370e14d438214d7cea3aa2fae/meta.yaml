@@ -1,8 +1,9 @@
 artifact_uri: file:///home/dino/Documents/SP24/mlruns/0/61cd8cb370e14d438214d7cea3aa2fae/artifacts
+deleted_time: 1709566469601
 end_time: null
 entry_point_name: ''
 experiment_id: '0'
-lifecycle_stage: active
+lifecycle_stage: deleted
 run_id: 61cd8cb370e14d438214d7cea3aa2fae
 run_name: stately-dog-773
 run_uuid: 61cd8cb370e14d438214d7cea3aa2fae
