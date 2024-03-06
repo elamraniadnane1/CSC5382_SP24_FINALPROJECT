@@ -17,14 +17,19 @@ import subprocess
 
 print("Welcome to the Stance Detection Model Training!")
 
+
 # Define the path to the model files and the CSV file
-CSV_FILE_PATH = '/home/dino/Desktop/SP24/biden_stance_train_public.csv'
+CSV_FILE_PATH = '/home/dino/Desktop/SP24/scripts/biden_new_2024.csv'
 pretrained_LM_path = '/home/dino/Desktop/SP24/bert-election2020-twitter-stance-biden'
 
 def validate_and_fix_data(df):
     stats = tfdv.generate_statistics_from_dataframe(df)
     schema = tfdv.infer_schema(stats)
     anomalies = tfdv.validate_statistics(stats, schema)
+    print("Initial Dataset Information:")
+    print("Shape:", df.shape)
+    print("Sample Data:\n", df.head())
+    print("Basic Statistics:\n", df.describe())
 
     # Display and log anomalies
     if anomalies.anomaly_info:
@@ -46,7 +51,8 @@ def run_command(command):
     process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     stdout, stderr = process.communicate()
     if process.returncode != 0:
-        print(f"Error: {stderr}")
+        # Enhanced error logging
+        print(f"Error occurred during command '{command}': {stderr.decode().strip()}")
     return stdout.decode().strip()
 
 # Initialize Git repository
@@ -104,6 +110,10 @@ def compute_statistics_and_detect_anomalies(df):
     # Assuming 'mapped_label' is the numerical representation of the 'label' column
     label_stats = df['mapped_label'].describe()
     print("Statistics for 'mapped_label':\n", label_stats)
+    print("Anomaly handling steps:")
+    print("- Converting 'text' to string.")
+    print("- Dropping missing values.")
+    print("- Removing outliers based on IQR.")
 
     # Detecting outliers using IQR
     Q1 = df['mapped_label'].quantile(0.25)
@@ -225,6 +235,8 @@ with mlflow.start_run() as run:
     # Tokenization for BERT model
     inputs = tokenizer(texts, padding=True, truncation=True, return_tensors="pt")
     input_ids = inputs["input_ids"]
+    print("Tokenization completed.")
+    print(f"Input IDs shape: {input_ids.shape}")
     attention_mask = inputs["attention_mask"]
     labels = torch.tensor(mapped_labels).long()
     
@@ -245,6 +257,10 @@ with mlflow.start_run() as run:
     train_loader = DataLoader(train_dataset, batch_size=hyperparams["batch_size"], shuffle=True)
     val_loader = DataLoader(val_dataset, batch_size=hyperparams["batch_size"])
     test_loader = DataLoader(test_dataset, batch_size=hyperparams["batch_size"])
+    
+    print("Dataset Splitting Details:")
+    print(f"Train size: {train_size}, Validation size: {val_size}, Test size: {test_size}")
+
 
     print(f"Dataset split into {len(train_dataset)} training, {len(val_dataset)} validation, and {len(test_dataset)} test samples.")
 
@@ -270,6 +286,7 @@ with mlflow.start_run() as run:
             grad_norm = np.sqrt(sum(p.grad.norm().item() ** 2 for p in model.parameters() if p.grad is not None))
             mlflow.log_metric(f"grad_norm_epoch_{epoch+1}", grad_norm)
             optimizer.step()
+            print(f"Batch {step+1}/{len(train_loader)}, Loss: {loss.item()}")
 
         avg_train_loss = total_train_loss / len(train_loader)
         mlflow.log_metric(f"avg_train_loss_epoch_{epoch+1}", avg_train_loss)
@@ -303,6 +320,7 @@ with mlflow.start_run() as run:
         })
 
         print(f"Evaluation for epoch {epoch+1} completed. Accuracy: {accuracy}, Precision: {precision}, Recall: {recall}, F1 Score: {f1}")
+        
     
     # Confusion Matrix and Classification Report
     conf_matrix = confusion_matrix(true_labels, predictions)
@@ -334,12 +352,20 @@ with mlflow.start_run() as run:
     os.remove(error_file_path)
 
     # Log errors and reports
-    mlflow.log_text(f"error_analysis_epoch_{epoch+1}.txt", "\n".join([f"{e[0]} - Predicted: {e[1]}, Actual: {e[2]}" for e in errors[:100]]))
+    error_analysis_file = f"error_analysis_epoch_{epoch+1}.txt"
+    with open(error_analysis_file, "w") as file:
+        for e in errors[:100]:
+            file.write(f"Text: {e[0]}, Predicted: {e[1]}, Actual: {e[2]}\n")
+
+    mlflow.log_artifact(error_analysis_file)
+    os.remove(error_analysis_file)
     mlflow.log_text(f"classification_report_epoch_{epoch+1}.txt", class_report)
     mlflow.log_artifact(CSV_FILE_PATH, "dataset")
     mlflow.pytorch.log_model(model, "model")
 
     print(f"Model training and evaluation completed. Model has been logged with run id: {run.info.run_id}")
+    print(f"Final Model State Dict Keys: {model.state_dict().keys()}")
+    print(f"MLflow run completed with run id: {run.info.run_id}")
     print("Stance Detection Model Training Finished Successfully.")
     # Assuming model is saved as 'model.pth' and dataset is 'dataset.csv'
     torch.save(model.state_dict(), "model.pth")

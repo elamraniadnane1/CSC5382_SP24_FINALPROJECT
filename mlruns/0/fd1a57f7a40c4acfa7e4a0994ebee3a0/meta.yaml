@@ -1,8 +1,9 @@
 artifact_uri: file:///home/dino/Documents/SP24/mlruns/0/fd1a57f7a40c4acfa7e4a0994ebee3a0/artifacts
+deleted_time: 1709680194591
 end_time: 1709079653220
 entry_point_name: ''
 experiment_id: '0'
-lifecycle_stage: active
+lifecycle_stage: deleted
 run_id: fd1a57f7a40c4acfa7e4a0994ebee3a0
 run_name: unique-owl-769
 run_uuid: fd1a57f7a40c4acfa7e4a0994ebee3a0

@@ -1,0 +1,16 @@
+artifact_uri: file:///home/dino/Documents/SP24/mlruns/0/bbd75f149f1248278dd29a672c0ab5cf/artifacts
+deleted_time: 1709742929499
+end_time: null
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: bbd75f149f1248278dd29a672c0ab5cf
+run_name: capable-stoat-82
+run_uuid: bbd75f149f1248278dd29a672c0ab5cf
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1709689535706
+status: 1
+tags: []
+user_id: dino

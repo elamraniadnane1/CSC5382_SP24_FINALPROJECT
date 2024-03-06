@@ -1,0 +1,16 @@
+artifact_uri: file:///home/dino/Documents/SP24/mlruns/0/9c6a7a46a0d74e56b7c4062267e47342/artifacts
+deleted_time: 1709742929506
+end_time: null
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 9c6a7a46a0d74e56b7c4062267e47342
+run_name: blushing-squid-66
+run_uuid: 9c6a7a46a0d74e56b7c4062267e47342
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1709688738879
+status: 1
+tags: []
+user_id: dino

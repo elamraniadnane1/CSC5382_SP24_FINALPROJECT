@@ -1,8 +1,9 @@
 artifact_uri: file:///home/dino/Documents/SP24/mlruns/0/f5e5957bd6aa43b09e9c3dc0a2c09288/artifacts
+deleted_time: 1709680194610
 end_time: 1709086786851
 entry_point_name: ''
 experiment_id: '0'
-lifecycle_stage: active
+lifecycle_stage: deleted
 run_id: f5e5957bd6aa43b09e9c3dc0a2c09288
 run_name: zealous-shrew-582
 run_uuid: f5e5957bd6aa43b09e9c3dc0a2c09288
