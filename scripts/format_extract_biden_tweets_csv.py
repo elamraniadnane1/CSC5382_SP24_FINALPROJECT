@@ -1,8 +1,8 @@
 import pandas as pd
 
 # File paths
-input_csv_file = '/home/dino/Desktop/SP24/scripts/Tw_2024.csv'  # Replace with your input file path
-output_csv_file = '/home/dino/Desktop/SP24/scripts/biden_new_2024.csv'  # Replace with your output file path
+input_csv_file = '/home/dino/Desktop/SP24/scripts/biden_new_2024_2_notformat.csv'  # Replace with your input file path
+output_csv_file = '/home/dino/Desktop/SP24/scripts/biden_new_2024_2.csv'  # Replace with your output file path
 
 def check_column_consistency(df, required_columns):
     missing_columns = [col for col in required_columns if col not in df.columns]

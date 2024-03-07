@@ -2,9 +2,9 @@ import pandas as pd
 import os
 
 # Paths to your CSV files
-csv_file_path1 = '/home/dino/Desktop/SP24/scripts/biden_stance_test_public.csv'
-csv_file_path2 = '/home/dino/Desktop/SP24/scripts/biden_stance_train_public.csv'
-merged_csv_file_path = '/home/dino/Desktop/SP24/scripts/biden_stance_public.csv'
+csv_file_path1 = '/home/dino/Desktop/SP24/scripts/Tw_2024_2.csv'
+csv_file_path2 = '/home/dino/Desktop/SP24/scripts/Tw_2024_3.csv'
+merged_csv_file_path = '/home/dino/Desktop/SP24/scripts/biden_new_2024_2_notformat.csv'
 
 # Chunk size (number of rows processed at a time)
 chunk_size = 10000

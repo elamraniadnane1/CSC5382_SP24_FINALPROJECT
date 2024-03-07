@@ -1,10 +1,42 @@
-# local package
+# Local package
 -e .
 
-# external requirements
-click
-Sphinx
-coverage
-awscli
-flake8
+# External requirements
+click>=7.0
+Sphinx>=3.0
+coverage>=5.0
+awscli>=1.18
+flake8>=3.8
 python-dotenv>=0.5.1
+
+# Machine Learning & Data Processing
+pandas>=1.0
+numpy>=1.18
+scikit-learn>=0.22
+tensorflow==2.4.1  # Ensuring compatibility with TFX
+tensorflow-data-validation==0.28.0
+
+# TensorFlow Extended for ML pipelines
+tfx==0.28.0
+
+# ZenML for pipeline orchestration
+zenml>=0.3.8
+
+# Feature Store Integration
+feast>=0.10.0
+
+# Additional dependencies for data validation and feature engineering
+great-expectations>=0.13.0
+apache-airflow>=2.0.0
+pyarrow>=2.0.0  # used by Parquet
+
+# Optional: For advanced analytics and visualization
+matplotlib>=3.3
+seaborn>=0.11
+
+# Database and storage integrations
+sqlalchemy>=1.3
+boto3>=1.16  # for AWS S3 integration
+
+# For model serialization and deserialization
+joblib>=0.16.0
