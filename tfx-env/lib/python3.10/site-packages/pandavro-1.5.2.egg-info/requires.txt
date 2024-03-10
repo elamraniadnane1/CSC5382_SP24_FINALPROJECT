@@ -1,0 +1,7 @@
+fastavro>=0.14.11
+numpy>=1.7.0
+pandas
+six>=1.9
+
+[tests]
+pytest

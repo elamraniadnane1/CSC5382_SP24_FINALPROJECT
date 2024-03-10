@@ -1,0 +1,3 @@
+[console_scripts]
+bowler = bowler.main:main
+

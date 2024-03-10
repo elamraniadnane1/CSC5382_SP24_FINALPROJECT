@@ -313,8 +313,6 @@ print(classification_report(flat_true_labels, flat_predictions))
 - **Timeliness of Insights:** The ability of the model to provide rapid insights, crucial for political campaigns responding to changing public opinions.
 - **Robustness Against Political Discourse Shifts:** The model's robustness against shifts in political discourse and the introduction of new topics or candidates.
 - **Improvement Over Baselines:** The degree to which the new model outperforms existing models and baselines, indicating the added value of the new approach.
-
-
 ## Other References
 
 - [IEEE Xplore - [Paper Title or Description]](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9530657)
@@ -322,4 +320,57 @@ print(classification_report(flat_true_labels, flat_predictions))
 - [Hugging Face Model Repository - kornosk/bert-election2020-twitter-stance-biden-KE-MLM](https://huggingface.co/kornosk/bert-election2020-twitter-stance-biden-KE-MLM)
 - [Papers With Code - Knowledge-Enhanced Masked Language Model for Stance Detection](https://paperswithcode.com/paper/knowledge-enhanced-masked-language-model-for)
 - [Retraining a BERT Model for Transfer Learning in Requirements Engineering: A Preliminary Study](https://www.researchgate.net/publication/365112611_Retraining_a_BERT_Model_for_Transfer_Learning_in_Requirements_Engineering_A_Preliminary_Study)
+
+# Milestone 2 Presentation & Report: AI System Development (2/3)
+## Project Overview
+
+- **Supervisor**: Dr. Asmae Mourhir
+- **Goal**: Ensuring ML pipeline reproducibility for the project, experiment tracking of datasets, models, using MLFlow.
+
+## Project Objective
+
+The goal of this milestone is to train and fine-tune an existing BERT model from Hugging Face to improve its business and performance metrics. The aim is to detect stance related to Biden, in the context of the US 2024 Presidential Elections, utilizing scrapped Tweets from a .csv dataset. MLFlow will be employed to track experiments during various steps within the project pipeline.
+
+## Project Requirements
+
+### Setting up Project Structure
+- **Recommendation**: Cookiecutter Data Science
+
+### Code and Data Versioning
+- **Recommendation**: Git with GitHub Flow & Git LFS
+
+### Experiment Tracking
+- **Tool**: MLFlow
+
+### Setting up a Meta Store for Metadata
+- **Recommendation**: Depending on experiment tracking choice: MLFlow tracking
+
+### Data Preparation and Validation
+
+#### Requirements
+
+- **Data Validation/Verification**:
+  - Google’s TensorFlow Data Validation (TFDV)
+  - Superconductive’s Great Expectations
+  - Amazon’s Deequ
+
+#### Library Suggestions
+- TFDV: 476 stars on GitHub
+- Great Expectations: 2,477 stars on GitHub
+- Deequ: 1,095 stars on GitHub
+
+### Setting up Data Pipeline as Part of the Larger ML Pipeline
+
+- **Use of a Feature Store for Preprocessing and Feature Engineering Functions**: ZenML
+
+## Milestone Goals
+
+1. Implement a Python script for orchestrating a full ML pipeline using ZenML.
+2. Create new .py files if they are not listed in the existing file set.
+3. Assume existing .py files contain necessary functions to be implemented immediately following the orchestration script.
+4. Design the pipeline with a logical sequence of steps.
+5. Integrate a feature store for preprocessing and feature engineering, using Feast with ZenML.
+6. Use the provided code snippet directly in the implementation.
+7. Create new .py files as needed for steps not already included in the list.
+8. Ensure each step in the pipeline is logged into MLFlow.
 
