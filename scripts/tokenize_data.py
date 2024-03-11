@@ -1,18 +1,35 @@
-from zenml.steps import step, Output
-from typing import Annotated
-from scripts.tokenize_data import tokenize_data
+# File: tokenize_data.py
 
-@step
-def tokenize_data_step(data: dict) -> Annotated[Output[dict], step("Tokenize Data")]:
+from transformers import AutoTokenizer
+import logging
+
+def tokenize_data(data, tokenizer_path):
     """
-    ZenML step to tokenize data.
+    Tokenizes the text data using a specified tokenizer.
 
     Args:
-        data (dict): Data to tokenize.
+        data (dict): A dictionary containing the text data to tokenize. 
+                     The text data should be under the key 'text'.
+        tokenizer_path (str): The path to the tokenizer.
 
     Returns:
-        dict: Tokenized data.
+        dict: A dictionary with the tokenized data.
     """
-    # Tokenize data using the tokenize_data function from scripts.tokenize_data
-    tokenized_data = tokenize_data(data)
-    return tokenized_data
+    try:
+        # Load the tokenizer
+        tokenizer = AutoTokenizer.from_pretrained(tokenizer_path)
+
+        # Extract text data
+        texts = data['text']
+
+        # Tokenize text
+        tokenized = tokenizer(texts, padding=True, truncation=True, return_tensors="pt")
+
+        # Update the original data dictionary with tokenized data
+        data.update(tokenized)
+
+        return data
+
+    except Exception as e:
+        logging.error(f"An error occurred during tokenization: {e}")
+        raise
