@@ -1,33 +1,7 @@
 feature {
-  name: "tweet_id"
-  type: INT
-  presence {
-    min_fraction: 1.0
-    min_count: 1
-  }
-  shape {
-    dim {
-      size: 1
-    }
-  }
-}
-feature {
-  name: "text"
+  name: "version https://git-lfs.github.com/spec/v1"
   type: BYTES
-  presence {
-    min_fraction: 1.0
-    min_count: 1
-  }
-  shape {
-    dim {
-      size: 1
-    }
-  }
-}
-feature {
-  name: "label"
-  type: BYTES
-  domain: "label"
+  domain: "\'version https://git-lfs.github.com/spec/v1\'"
   presence {
     min_fraction: 1.0
     min_count: 1
@@ -39,8 +13,7 @@ feature {
   }
 }
 string_domain {
-  name: "label"
-  value: "AGAINST"
-  value: "FAVOR"
-  value: "NEUTRAL"
+  name: "\'version https://git-lfs.github.com/spec/v1\'"
+  value: "oid sha256:c44ac103c4775adfb381f0bdd203dfd3efd28bab90a91b61a71604b50580aa22"
+  value: "size 68457"
 }

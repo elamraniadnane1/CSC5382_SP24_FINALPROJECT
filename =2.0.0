@@ -1,0 +1,22 @@
+Defaulting to user installation because normal site-packages is not writeable
+Collecting numpy==1.22
+  Downloading numpy-1.22.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (16.8 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.8/16.8 MB 725.2 kB/s eta 0:00:00
+Collecting pandas==1.4.3
+  Downloading pandas-1.4.3-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (11.6 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 11.6/11.6 MB 64.6 kB/s eta 0:00:00
+Requirement already satisfied: pydantic in /home/dino/.local/lib/python3.10/site-packages (1.10.14)
+Requirement already satisfied: pytz>=2020.1 in /home/dino/.local/lib/python3.10/site-packages (from pandas==1.4.3) (2024.1)
+Requirement already satisfied: python-dateutil>=2.8.1 in /home/dino/.local/lib/python3.10/site-packages (from pandas==1.4.3) (2.9.0.post0)
+Requirement already satisfied: typing-extensions>=4.2.0 in /home/dino/.local/lib/python3.10/site-packages (from pydantic) (4.10.0)
+Requirement already satisfied: six>=1.5 in /home/dino/.local/lib/python3.10/site-packages (from python-dateutil>=2.8.1->pandas==1.4.3) (1.16.0)
+Installing collected packages: numpy, pandas
+  Attempting uninstall: numpy
+    Found existing installation: numpy 1.26.4
+    Uninstalling numpy-1.26.4:
+      Successfully uninstalled numpy-1.26.4
+  Attempting uninstall: pandas
+    Found existing installation: pandas 2.2.1
+    Uninstalling pandas-2.2.1:
+      Successfully uninstalled pandas-2.2.1
+Successfully installed numpy-1.22.0 pandas-1.4.3

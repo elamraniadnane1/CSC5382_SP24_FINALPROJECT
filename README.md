@@ -324,10 +324,9 @@ print(classification_report(flat_true_labels, flat_predictions))
 # Milestone 2 Presentation & Report: AI System Development (2/3)
 ## Project Overview
 
-- **Supervisor**: Dr. Asmae Mourhir
 - **Goal**: Ensuring ML pipeline reproducibility for the project, experiment tracking of datasets, models, using MLFlow.
 
-## Project Objective
+## Project Objective Recapitulation 
 
 The goal of this milestone is to train and fine-tune an existing BERT model from Hugging Face to improve its business and performance metrics. The aim is to detect stance related to Biden, in the context of the US 2024 Presidential Elections, utilizing scrapped Tweets from a .csv dataset. MLFlow will be employed to track experiments during various steps within the project pipeline.
 
@@ -351,26 +350,118 @@ The goal of this milestone is to train and fine-tune an existing BERT model from
 
 - **Data Validation/Verification**:
   - Google’s TensorFlow Data Validation (TFDV)
-  - Superconductive’s Great Expectations
-  - Amazon’s Deequ
+
 
 #### Library Suggestions
 - TFDV: 476 stars on GitHub
-- Great Expectations: 2,477 stars on GitHub
-- Deequ: 1,095 stars on GitHub
+
 
 ### Setting up Data Pipeline as Part of the Larger ML Pipeline
 
-- **Use of a Feature Store for Preprocessing and Feature Engineering Functions**: ZenML
+- **Use of a Feature Store for Preprocessing and Feature Engineering Functions**: ZenML & Feast
 
-## Milestone Goals
+## Steps to Achieve the Milestone Goals
 
-1. Implement a Python script for orchestrating a full ML pipeline using ZenML.
-2. Create new .py files if they are not listed in the existing file set.
-3. Assume existing .py files contain necessary functions to be implemented immediately following the orchestration script.
-4. Design the pipeline with a logical sequence of steps.
-5. Integrate a feature store for preprocessing and feature engineering, using Feast with ZenML.
-6. Use the provided code snippet directly in the implementation.
-7. Create new .py files as needed for steps not already included in the list.
-8. Ensure each step in the pipeline is logged into MLFlow.
+# Milestone Goals
+
+## Steps to Achieve the Milestone Goals
+
+1. **Environment Setup and Data Ingestion**
+
+   - Environment Setup: Set up a Python environment with necessary libraries (e.g., ZenML, TensorFlow, TFDV, Pandas, Scikit-learn).
+   - Data Ingestion: Load your dataset from CSV_FILE_PATH.
+
+2. **Data Preprocessing, Visualization, and Validation**
+
+   - Data Cleaning: Clean the text data in your dataset (remove URLs, special characters, punctuation, etc.).
+   - Data Exploration and Visualization:
+     - Visualize data distribution, label imbalance, and common words/phrases.
+   - Data Splitting: Split the dataset into training, validation, and test sets.
+   - Data Validation with TFDV:
+     - Infer schema using TFDV on the training set.
+     - Show data statistics and visualize them for better understanding.
+     - Validate the validation and test sets against the inferred schema.
+   - Anomaly Detection:
+     - Define what constitutes an anomaly (e.g., missing values, unexpected value ranges).
+     - Use TFDV to check for anomalies in the validation and test sets.
+     - Revise data based on anomaly checks, fixing issues or updating schema as needed.
+
+3. **Feature Engineering and Feature Store Integration**
+
+   - Feature Engineering:
+     - Text Tokenization: Tokenize the text using a tokenizer compatible with your BERT model.
+     - Feature Extraction: Convert text data into a format suitable for the BERT model.
+   - Feature Store Setup: Establish a feature store to manage and store engineered features efficiently.
+   - Storing Features: Save the processed features and labels in the feature store for easy retrieval during model training and inference.
+
+4. **Model Loading, Configuration, and Fine-Tuning**
+
+   - Load Pretrained Model: Load the pretrained BERT model from PRETRAINED_LM_PATH.
+   - BERT Hyperparameters Definition:
+     - Learning Rate, Batch Size, Number of Epochs.
+   - Model Adaptation: Adapt the model for stance detection.
+   - Hyperparameter Tuning: Optimize hyperparameters for best performance.
+
+5. **Model Training and Validation**
+
+   - Training Process: Train the model using the training set, with MLFlow for experiment tracking.
+   - Validation: Continuously validate the model on the validation set.
+
+6. **Model Evaluation and Visualization**
+
+   - Evaluation Metrics: Assess the model on the test set, focusing on accuracy, precision, recall, and F1 score.
+   - Performance Visualization: Create and interpret various visualizations to understand model performance.
+
+7. **Model Deployment, Monitoring, and Updating**
+
+   - Deployment Readiness: Prepare and export the model for deployment.
+   - Monitoring and Performance Visualization: Monitor and visualize model performance in production.
+   - Model Updating: Define strategies for periodic retraining or fine-tuning.
+
+8. **Additional Considerations**
+
+   - Data and Model Versioning: Implement versioning for data and models.
+   - Ethical and Fairness Considerations: Focus on fairness and unbiased modeling.
+
+# Parallel Pipeline
+
+## 1. Environment and Tool Setup
+
+- Tool Setup: Set up Hadoop ecosystem for batch processing.
+- Environment Setup: Ensure Python and necessary libraries (like Tweepy for Twitter API, Hadoop-related libraries, etc.) are installed.
+
+## 2. Tweet Scraping Using Twitter API
+
+- Twitter API Integration: Integrate Twitter API using Tweepy or a similar library.
+- Data Collection: Define parameters (like keywords, hashtags, date ranges) for collecting tweets related to the US 2024 Elections and Biden's stance.
+- Initial Data Store: Store the scraped tweets in a temporary storage or directly load into Hadoop Distributed File System (HDFS).
+
+## 3. ELT Pipeline Setup with Hadoop
+
+- Extract: Extract tweets from the temporary storage or directly from HDFS.
+- Load: Load the extracted tweets into Hadoop's ecosystem (like into HBase or Hive for managed storage).
+- Transform: Perform transformations using tools like Apache Pig or Hive. This includes data cleaning, tokenization, and preparation for the stance detection model.
+
+## 4. Running the Stance Detection Pipeline
+
+- Data Preprocessing: Clean the data (remove URLs, special characters, punctuation, etc.), tokenize text, and encode labels.
+- Feature Engineering: Process the text data to convert it into a suitable format for the BERT model.
+- Model Training and Evaluation: Load the pretrained BERT model, fine-tune it on the processed data, and evaluate its performance.
+
+## 5. Automation and Orchestration
+
+- Orchestration Tool Setup: Use a tool like Apache Airflow or Oozie for orchestrating the workflow.
+- Workflow Definition: Define the sequence of tasks - from tweet scraping, loading data into Hadoop, running transformations, to executing the ML pipeline.
+- Scheduling: Set up the pipeline to run at scheduled intervals or trigger based on specific conditions.
+
+## 6. Monitoring and Logging
+
+- Monitoring: Implement monitoring for each stage of the pipeline to ensure smooth execution.
+- Logging: Use logging mechanisms to record the pipeline's performance and to debug any issues.
+
+## 7. Post-Processing and Storage
+
+- Result Storage: Store the output of the machine learning pipeline, like the classified stances, in a database or a file system for further analysis or reporting.
+- Data Archiving: Archive older data in cost-effective storage solutions if necessary.
+
 
