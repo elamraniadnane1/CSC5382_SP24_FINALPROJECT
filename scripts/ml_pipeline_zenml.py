@@ -351,51 +351,49 @@ def save_model_step(model: object, save_dir: str = '/path/to/save/models/') -> A
 
 
 @step
-def track_experiment_step() -> Annotated[Output[str], step("Track Experiment")]:
+def track_experiment_step(hyperparams: dict, evaluation_metrics: dict, model_path: str, other_artifacts: dict = None) -> Annotated[Output[str], step("Track Experiment")]:
     """
     ZenML step to track an experiment.
+
+    Args:
+        hyperparams (dict): Hyperparameters used for training.
+        evaluation_metrics (dict): Evaluation metrics of the model.
+        model_path (str): Path to the saved model.
+        other_artifacts (dict, optional): Additional artifacts to log.
 
     Returns:
         str: Experiment ID.
     """
-    # Track experiment using the track_experiment function from scripts.experiment_tracking
-    experiment_id = track_experiment()
+    # Track the experiment
+    experiment_id = track_experiment(hyperparams, evaluation_metrics, model_path, other_artifacts)
+    
     return experiment_id
 
 
 
+
 @step
-def interpret_model_step(model: object) -> Annotated[Output[str], step("Interpret Model")]:
+def interpret_model_step(model: object, test_loader: DataLoader) -> Output(str, step("Interpret Model")):
     """
     ZenML step to interpret a trained machine learning model.
 
     Args:
         model (object): Trained machine learning model.
+        test_loader (DataLoader): DataLoader containing test data for interpretation.
 
     Returns:
         str: Interpretation result.
     """
-    # Interpret model using the interpret_model function from scripts.model_interpretability
-    interpretation = interpret_model(model)
+    # Call the interpret_model function from scripts.interpret_model
+    # Pass the model and test_loader as arguments to the interpret_model function
+    interpretation = interpret_model(model, test_loader)
+
+    # Return the interpretation result
     return interpretation
 
-@step
-def mitigate_bias_step(data: dict) -> Annotated[Output[dict], step("Mitigate Bias")]:
-    """
-    ZenML step to mitigate bias in data.
-
-    Args:
-        data (dict): Data to mitigate bias.
-
-    Returns:
-        dict: Mitigated data.
-    """
-    # Mitigate bias using the mitigate_bias function from scripts.bias_mitigation
-    mitigated_data = mitigate_bias(data)
-    return mitigated_data
 
 @step
-def implement_feature_store_step(data: dict) -> Annotated[Output[str], step("Implement Feature Store")]:
+def implement_feature_store_step(data: dict) -> Output(str, step("Implement Feature Store")):
     """
     ZenML step to implement a feature store.
 
@@ -405,7 +403,6 @@ def implement_feature_store_step(data: dict) -> Annotated[Output[str], step("Imp
     Returns:
         str: Path to the implemented feature store.
     """
-    # Implement feature store using the implement_feature_store function from scripts.feature_store_implementation
     feature_store_path = implement_feature_store(data)
     return feature_store_path
 
