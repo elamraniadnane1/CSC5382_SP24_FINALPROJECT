@@ -1,30 +1,40 @@
-from zenml import pipeline, step
+# Standard Library Imports
+import os
+import sys
+from typing import Dict, Tuple, Annotated
+
+# Third-party Library Imports
 import mlflow
 import mlflow.pytorch
 import pandas as pd
-from transformers import AutoTokenizer, AutoModelForSequenceClassification
-import torch
-from torch.utils.data import DataLoader, TensorDataset, random_split
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
-import os
 import numpy as np
-from sklearn.metrics import confusion_matrix, classification_report
 import seaborn as sns
 import matplotlib.pyplot as plt
-from torch.optim import AdamW
-import tensorflow_data_validation as tfdv
-import subprocess
-from zenml.pipelines import pipeline
-from zenml.steps import step, Output
-import logging
-from typing import Tuple, Annotated
+from sklearn.metrics import (
+    accuracy_score,
+    precision_score,
+    recall_score,
+    f1_score,
+    confusion_matrix,
+    classification_report,
+)
 from sklearn.model_selection import train_test_split
 from sklearn.svm import SVC
 from sklearn.base import ClassifierMixin
 from sklearn.datasets import load_iris
-from typing import Dict, Tuple, Annotated
-import sys
-sys.path.append('/home/dino/Desktop/SP24')
+from torch.optim import AdamW
+from torch.utils.data import DataLoader, TensorDataset, random_split
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
+import torch
+import tensorflow_data_validation as tfdv
+import subprocess
+
+# ZenML Imports
+from zenml.pipelines import pipeline
+from zenml.steps import step, Output
+import logging
+
+# Custom Script Imports
 from scripts.load_data import load_data
 from scripts.tokenize_data import tokenize_data
 from scripts.prepare_data import prepare_data
@@ -33,6 +43,7 @@ from scripts.evaluate_model import evaluate_model
 from scripts.save_model import save_model
 from scripts.experiment_tracking import track_experiment
 from scripts.feature_store_implementation import implement_feature_store
+
 
 # Define constants like CSV_FILE_PATH and hyperparameters here
 # Set hyperparameters
@@ -49,7 +60,6 @@ CSV_FILE_PATH = '/home/dino/Desktop/SP24/scripts/biden_stance_public_3_labeled.c
 pretrained_LM_path = '/home/dino/Desktop/SP24/bert-election2020-twitter-stance-biden'
 
 
-
 # Define function to run shell commands
 def run_command(command):
     process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -62,30 +72,8 @@ def run_command(command):
 print("Initializing Git repository...")
 run_command("git init")
 
-# Enable Git LFS for large files
-print("Enabling Git LFS for large files...")
-run_command("git lfs install")
-# Add large files to track with Git LFS
-run_command("git lfs track '*.pt'")  # Tracking PyTorch model files
-run_command("git lfs track '*.csv'")  # Tracking large CSV datasets
-
-# Add .gitattributes to the staging area
-run_command("git add .gitattributes")
-
-
-# Importing necessary functions from scripts
-
-
-# Continue importing additional scripts as needed
-# Ensure each of the imported functions exists and works as intended in their respective script files
-# Ensure you have created these additional `.py` files with the respective functions 
-# To be used in the pipeline. Each function should be designed to fulfill a specific task 
-# In the pipeline and should be modular for easy integration.
-
-
 
 # Define ZenML steps
-# Define additional steps similarly...
 
 @step
 def load_data_step() -> Annotated[Output[Dict], step("Load Data")]:
