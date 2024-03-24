@@ -464,4 +464,71 @@ The goal of this milestone is to train and fine-tune an existing BERT model from
 - Result Storage: Store the output of the machine learning pipeline, like the classified stances, in a database or a file system for further analysis or reporting.
 - Data Archiving: Archive older data in cost-effective storage solutions if necessary.
 
+# Pytest Setup Guide
+
+## Setting up Pytest for your Project
+
+1. Create a `tests` directory in your project.
+
+2. Inside the `tests` directory, create a file named `test_pipeline.py` or a similar descriptive name.
+
+3. Import the necessary modules including Pytest, pandas, and any specific methods or classes required for testing.
+
+## Testing Steps
+
+### 1. Testing Data Loading (`load_data` Step)
+
+- Test if the `load_data` function handles invalid file paths correctly.
+- Verify that the function returns a DataFrame for valid CSV paths.
+- Check if the DataFrame structure is as expected (column names, data types).
+
+### 2. Testing Data Preprocessing (`preprocess_data` Step)
+
+- Verify that the text cleaning process removes unwanted characters.
+- Ensure that the label encoding is done correctly.
+- Test edge cases like empty strings or non-string inputs.
+
+### 3. Testing Data Visualization (`visualize_data` Step)
+
+- Ensure that the function handles DataFrame with different characteristics (e.g., different column names, missing data).
+- Test if the function gracefully handles an empty DataFrame.
+
+### 4. Testing Data Splitting (`split_data_1`, `split_data_2`, `split_data_3` Steps)
+
+- Confirm that the data splits are proportionate to the specified sizes.
+- Verify that the splits are disjoint and collectively exhaustive.
+
+### 5. Testing Data Validation (`validate_data` Step)
+
+- Test the handling of data anomalies.
+- Validate that the function adjusts the data according to the defined schema.
+
+### 6. Testing Feature Engineering (`feature_engineering` Step)
+
+- Confirm the successful connection to Cassandra.
+- Ensure proper tokenization and storage of features in the database.
+- Validate that the tokens column is added to the DataFrame correctly.
+
+### 7. Testing Model Training (`train_model` Step)
+
+- Verify model training with different hyperparameters.
+- Check that the model saves checkpoints correctly.
+- Ensure that the metrics (accuracy, precision, recall, F1 score) are logged to MLflow.
+
+## Integration and End-to-End Tests
+
+- Run the entire pipeline to ensure all steps integrate correctly.
+- Test the pipeline with a small sample dataset to validate the end-to-end process.
+- Check for any unhandled exceptions or errors during the pipeline run.
+
+## Writing the Tests
+
+- Each test should be a function in `test_pipeline.py` starting with `test_`.
+- Use assert statements to verify outcomes.
+- Utilize Pytest fixtures for setup and teardown when needed.
+
+## Running the Tests
+
+- Run the tests using the Pytest command in the terminal: `pytest tests/`.
+
 
