@@ -423,6 +423,57 @@ The goal of this milestone is to train and fine-tune an existing BERT model from
    - Data and Model Versioning: Implement versioning for data and models.
    - Ethical and Fairness Considerations: Focus on fairness and unbiased modeling.
 
+
+## Feature Engineering
+
+- **Tokenization:** Utilizes the BERT tokenizer to process text data.
+- **Cassandra Integration:**
+  - Connects to Cassandra.
+  - Creates a new table if not present.
+  - Prepares batch statements for data insertion.
+- **Data Processing:**
+  - Iterates over the DataFrame.
+  - Generates UUIDs for each row.
+  - Tokenizes text data and inserts it into Cassandra.
+  - Adds a new 'tokens' column in the DataFrame with tokenized data.
+
+## Training the Model
+
+- **BERT Model for Sequence Classification:**
+  - Utilizes PyTorch for training.
+  - Loads a pre-trained BERT model.
+  - Configures the number of unique labels in the training data.
+- **Data Preparation:**
+  - Tokenizes data using the BERT tokenizer.
+  - Creates TensorDataset and DataLoader objects.
+- **Training Process:**
+  - Initializes AdamW optimizer and learning rate scheduler.
+  - Employs a training loop over epochs and batches.
+  - Updates model weights through backpropagation.
+  - Performs validation post each epoch.
+  - Calculates metrics: accuracy, precision, recall, and F1 score.
+- **MLflow Integration:**
+  - Tracks training metrics.
+  - Logs the trained model.
+
+## Model Evaluation
+
+- **Within Training Loop:**
+  - Validation metrics (accuracy, precision, recall, F1 score) are calculated.
+  - Metrics are logged using MLflow.
+
+## Pipeline Definition
+
+- **Utilizing ZenML:**
+  - Pipeline defined for data loading, preprocessing, visualization.
+  - Splits data into training, validation, and testing sets.
+  - Validates data using TensorFlow Data Validation (TFDV).
+- **Pipeline Steps:**
+  - Each step is a function with specific inputs and outputs.
+  - Pipeline instantiated with these defined steps.
+
+
+
 # Parallel Pipeline
 
 ## 1. Environment and Tool Setup
