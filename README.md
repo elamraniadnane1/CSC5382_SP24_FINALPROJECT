@@ -583,4 +583,24 @@ The goal of this milestone is to train and fine-tune an existing BERT model from
 
 - Run the tests using the Pytest command in the terminal: `pytest tests/`.
 
+## Metrics for Business Goal Evaluation
+
+1. **Accuracy of Election Outcome Prediction:**
+   - The model accuracy metric from the training step directly relates to this business metric. It measures how accurately the model predicts the election outcomes based on the sentiment analysis of tweets.
+
+2. **Stance Detection Accuracy and Organization Satisfaction:**
+   - The precision and recall metrics obtained during the model evaluation step are directly relevant here. Precision measures the accuracy of stance detection, while recall measures the model's ability to capture all instances of a particular stance. High precision and recall indicate a better stance detection accuracy, which contributes to organization satisfaction.
+
+3. **Precision and Recall in Sentiment Classification:**
+   - Similarly, precision and recall in sentiment classification, obtained during model evaluation, directly correspond to this business metric. High precision and recall in sentiment classification ensure that the model accurately identifies sentiments towards specific candidates or issues.
+
+4. **Timeliness of Insights:**
+   - While not directly measured in the provided code, the training and evaluation speed of the model indirectly affects the timeliness of insights. Faster training and inference times enable quicker generation of insights, which is crucial for responding to changing public opinions in political campaigns.
+
+5. **Robustness Against Political Discourse Shifts:**
+   - The robustness of the model against shifts in political discourse is indirectly measured by evaluating its performance on unseen data or validation data. A model that maintains high accuracy, precision, and recall on diverse datasets is more likely to be robust against shifts in political discourse.
+
+6. **Improvement Over Baselines:**
+   - Comparing the performance metrics (accuracy, precision, recall) of the new model against baselines provides a direct measure of improvement. Higher values of these metrics for the new model indicate its superiority over existing models and baselines.
+
 
