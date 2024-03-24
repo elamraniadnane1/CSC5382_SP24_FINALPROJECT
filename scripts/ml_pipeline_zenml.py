@@ -8,8 +8,6 @@ import seaborn as sns
 from wordcloud import WordCloud
 from transformers import BertTokenizer
 import tensorflow as tf
-# TensorFlow and related imports
-import tensorflow as tf
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 import tensorflow_data_validation as tfdv
@@ -31,6 +29,9 @@ import tweepy
 # Other imports you might need (depending on your exact requirements)
 import os
 os.environ['PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION'] = 'python'
+os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
+os.environ['HF_HUB_DISABLE_SYMLINKS_WARNING'] = '1'
+
 import json
 import requests
 from cassandra.cluster import Cluster
@@ -39,7 +40,8 @@ import uuid
 import json
 import pandas as pd
 from sklearn.model_selection import train_test_split
-
+import tensorflow as tf
+tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
 
 
 @step
@@ -61,15 +63,22 @@ def load_data(csv_file_path):
 
 
 # Constants and Hyperparameters
-CSV_FILE_PATH = '/home/dino/Desktop/SP24/scripts/biden_stance_public.csv'
-PRETRAINED_LM_PATH = '/home/dino/Desktop/SP24/bert-election2020-twitter-stance-biden'
+CSV_FILE_PATH = 'C:\\Users\\LENOVO\\Desktop\\SP24\\scripts\\dataset.csv'
+PRETRAINED_LM_PATH = 'C:\\Users\\LENOVO\\Desktop\\SP24\\bert-election2020-twitter-stance-biden'
 HYPERPARAMS = {
     "batch_size": 8,
     "learning_rate": 2e-5,
     "epochs": 2,
-    "weight_decay": 0.01
+    "weight_decay": 0.01,
+    'max_grad_norm': 1.0,
+    'lr_step_size': 1,
+    'lr_gamma': 0.1,
+    
 }
 print("Hyperparameters:", HYPERPARAMS)
+import mlflow
+
+mlflow.set_tracking_uri('http://127.0.0.1:5000')  # Replace with your server URI
 
 
 @step
@@ -306,24 +315,23 @@ def feature_engineering(data: pd.DataFrame) -> pd.DataFrame:
         pd.DataFrame: DataFrame with engineered features.
     """
     # Connect to Cassandra with load-balancing policy specified
-    load_balancing_policy = DCAwareRoundRobinPolicy(local_dc='datacenter1')
-    cluster = Cluster(contact_points=['127.0.0.1'], load_balancing_policy=load_balancing_policy)
+    cluster = Cluster(contact_points=['127.0.0.1'], port=9042)
     session = cluster.connect()
 
     # Specify the keyspace
-    session.set_keyspace('my_keyspace')
+    session.set_keyspace('keyspace')
 
     # Create the 'features' table if it does not exist
     session.execute("""
-        CREATE TABLE IF NOT EXISTS my_keyspace.features (
+        CREATE TABLE IF NOT EXISTS "keyspace".features (
             id UUID PRIMARY KEY,
             features list<int>
         )
     """)
 
     # Prepare a batch statement for inserting data into the 'features' table
-    insert_statement = session.prepare("INSERT INTO my_keyspace.features (id, features) VALUES (?, ?)")
-    batch = BatchStatement(consistency_level=ConsistencyLevel.QUORUM)
+    insert_statement = session.prepare('INSERT INTO "keyspace".features (id, features) VALUES (?, ?)')
+    batch = BatchStatement(consistency_level=ConsistencyLevel.ONE)
     # Add a 'tokens' column to the DataFrame if it doesn't exist
     if 'tokens' not in data.columns:
         data['tokens'] = None
@@ -356,9 +364,143 @@ def feature_engineering(data: pd.DataFrame) -> pd.DataFrame:
 
     return data
 
+from transformers import BertForSequenceClassification, BertTokenizer
+import torch
+from torch.utils.data import DataLoader, TensorDataset
+
+import pandas as pd
+import torch
+from torch.utils.data import DataLoader, TensorDataset
+from transformers import BertForSequenceClassification, BertTokenizer
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+import mlflow
+import numpy as np
+@step
+def train_model(train_data: pd.DataFrame, val_data: pd.DataFrame, hyperparams: dict) -> BertForSequenceClassification:
+    """
+    Step to train the BERT model using PyTorch, with MLflow tracking.
+
+    Args:
+        train_data (pd.DataFrame): Training data.
+        val_data (pd.DataFrame): Validation data.
+        hyperparams (dict): Hyperparameters for training.
+
+    Returns:
+        BertForSequenceClassification: Trained BERT model.
+    """
+    # Load pre-trained BERT model for PyTorch
+    unique_labels = train_data['label'].nunique()
+    print(f"Number of unique labels: {unique_labels}")
+    num_labels = len(np.unique(train_data['label'].values))
+    model = BertForSequenceClassification.from_pretrained(PRETRAINED_LM_PATH, num_labels=num_labels, ignore_mismatched_sizes=True)
+    mlflow.log_dict(model.config.to_dict(), "model_config.json")
+    print(f"Training on {len(train_data)} samples")
+    print(f"Validating on {len(val_data)} samples")
+    print(f"Training for {hyperparams['epochs']} epochs")
+    print(f"Batch size: {hyperparams['batch_size']}")
+    print(f"Learning rate: {hyperparams['learning_rate']}")
+    mlflow.log_params(hyperparams)
+
+
+    # Tokenization
+    tokenizer = BertTokenizer.from_pretrained(PRETRAINED_LM_PATH)
+    train_encodings = tokenizer(list(train_data['text']), truncation=True, padding=True, return_tensors="pt")
+    val_encodings = tokenizer(list(val_data['text']), truncation=True, padding=True, return_tensors="pt")
+    # Convert labels to LongTensor
+    train_labels = torch.tensor(train_data['label'].values).long()
+    val_labels = torch.tensor(val_data['label'].values).long()
+    
+   # Create TensorDataset
+    train_dataset = TensorDataset(train_encodings['input_ids'], train_encodings['attention_mask'], train_labels)
+    val_dataset = TensorDataset(val_encodings['input_ids'], val_encodings['attention_mask'], val_labels)
+
+    # DataLoader
+    train_loader = DataLoader(train_dataset, batch_size=hyperparams['batch_size'], shuffle=True)
+    val_loader = DataLoader(val_dataset, batch_size=hyperparams['batch_size'])
+
+    # Optimizer
+    optimizer = torch.optim.AdamW(model.parameters(), lr=hyperparams['learning_rate'], weight_decay=hyperparams['weight_decay'])
+
+    # Initialize the scheduler
+    scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=hyperparams['lr_step_size'], gamma=hyperparams['lr_gamma'])
+
+
+    # MLflow tracking   
+    # End any existing run before starting a new one
+    if mlflow.active_run():
+        mlflow.end_run()
+    mlflow.start_run()
+    mlflow.log_params(hyperparams)
+
+    # Training loop
+    # Checkpoint directory
+    checkpoint_dir = "model_checkpoints"
+    os.makedirs(checkpoint_dir, exist_ok=True)
+
+    best_val_loss = float('inf')
+    
+    model.train()
+    for epoch in range(hyperparams['epochs']):
+        print(f"Starting epoch {epoch+1}/{hyperparams['epochs']}")
+        total_loss = 0
+        total_val_loss = 0
+        print(f"Starting training for Epoch {epoch + 1}/{hyperparams['epochs']}")
+        for batch in train_loader:
+            optimizer.zero_grad()
+            input_ids, attention_mask, labels = batch
+            outputs = model(input_ids, attention_mask=attention_mask, labels=labels)
+            loss = outputs.loss
+            total_loss += loss.item()
+            total_val_loss += loss.item()
+            loss.backward()
+            torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=hyperparams['max_grad_norm'])
+            optimizer.step()
+            scheduler.step()
+        avg_train_loss = total_loss / len(train_loader)
+        print(f"Average training loss for epoch {epoch+1}: {avg_train_loss}")
+        avg_val_loss = total_val_loss / len(val_loader)
+        scheduler.step(avg_val_loss)
+        print(f"Adjusted learning rate to: {scheduler.get_last_lr()[0]}")
+        current_lr = scheduler.get_last_lr()[0]
+        print(f"Learning rate updated to {current_lr}")
+        mlflow.log_metric("train_loss", avg_train_loss, step=epoch)
+        
+        # Validation loop
+        model.eval()
+        val_labels = []
+        val_preds = []
+        total_val_loss = 0
+        with torch.no_grad():
+            for batch in val_loader:
+                input_ids, attention_mask, labels = batch
+                outputs = model(input_ids, attention_mask=attention_mask)
+                logits = outputs.logits
+                loss = outputs.loss
+                if loss is not None:
+                    total_val_loss += loss.item()
+                val_labels.extend(labels.numpy())
+                val_preds.extend(np.argmax(logits.numpy(), axis=1))
+        avg_val_loss = total_val_loss / len(val_loader) if len(val_loader) > 0 else 0
+        print(f"Average validation loss for epoch {epoch+1}: {avg_val_loss}")
+        scheduler.step(avg_val_loss)  # Adjust learning rate
+        accuracy = accuracy_score(val_labels, val_preds)
+        precision = precision_score(val_labels, val_preds, average='macro')
+        recall = recall_score(val_labels, val_preds, average='macro')
+        f1 = f1_score(val_labels, val_preds, average='macro')
+
+        # Log validation metrics
+        print(f"Validation Metrics for epoch {epoch+1}: Accuracy: {accuracy}, Precision: {precision}, Recall: {recall}, F1 Score: {f1}")
+        mlflow.log_metrics({'val_accuracy': accuracy, 'val_precision': precision, 'val_recall': recall, 'val_f1': f1}, step=epoch)
+        
+        # Log the model to MLflow
+        mlflow.pytorch.log_model(model, "model")
+        mlflow.end_run()
+
+    return model
+
 # 7. Pipeline Definition
 @pipeline
-def stance_pipeline(
+def biden_stance_pipeline(
     load_data_step,
     preprocess_data_step,
     visualize_data_step,
@@ -367,6 +509,7 @@ def stance_pipeline(
     split_data_3_step,
     validate_data_step,
     feature_engineering_step,
+    train_model_step,
 
 ):
     data = load_data_step(csv_file_path=CSV_FILE_PATH)
@@ -377,20 +520,20 @@ def stance_pipeline(
     test_data = split_data_3_step(data=preprocessed_data)
     validate_data_step(train_data, val_data, test_data)
     features = feature_engineering_step(train_data)
+    model = train_model_step(train_data,val_data,HYPERPARAMS)
 
 # Correctly instantiate the pipeline with step instances
-stance_pipeline = stance_pipeline(
+biden_stance_pipeline = biden_stance_pipeline(
     load_data_step=load_data(),                 # Instantiate the load_data step
     preprocess_data_step=preprocess_data(),     # Instantiate the preprocess_data step
     visualize_data_step=visualize_data(),       # Instantiate the visualize_data step
     split_data_1_step=split_data_1(),               # Instantiate the split_data step
-    split_data_2_step=split_data_2(),  
-    split_data_3_step=split_data_3(),  
+    split_data_2_step=split_data_2(),
+    split_data_3_step=split_data_3(),
     validate_data_step=validate_data(),         # Instantiate the validate_data step
-    feature_engineering_step = feature_engineering()
+    feature_engineering_step = feature_engineering(),
+    train_model_step=train_model()
 )
 
 # Run the pipeline
-stance_pipeline.run()
-
-
+biden_stance_pipeline.run()
