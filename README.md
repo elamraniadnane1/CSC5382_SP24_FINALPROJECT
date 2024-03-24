@@ -178,6 +178,16 @@ Inspired by Huggingface model cards, this section provides details about the pre
 ### Accessing the Model
 - **Model Files:** To access the model files, visit the Hugging Face repository at [kornosk/bert-election2020-twitter-stance-biden](https://huggingface.co/kornosk/bert-election2020-twitter-stance-biden/tree/main).
 
+| Stage                     | Description                                                                                                                                                                                                                          |
+|---------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **1. Problem Definition** | Stance detection on Twitter for political entities (Joe Biden and Donald Trump) during the 2020 US Presidential election.                                                                                                            |
+| **2. Data Collection**    | Over 5 million tweets collected from January 2020 to September 2020 using election-related hashtags and keywords through the Twitter Streaming API.                                                                                  |
+| **3. Data Labeling**      | Tweets labeled for stance towards each candidate with three classes: support, opposition, neutral. Annotation done using Amazon Mechanical Turk.                                                                                     |
+| **4. Preprocessing**      | Unlabeled tweets used for fine-tuning language models. Key stance words identified using weighted log-odds-ratio technique with Dirichlet priors.                                                                                     |
+| **5. Model Architecture** | A BERT-based model enhanced with Knowledge Enhanced Masked Language Modeling (KE-MLM). Significant tokens for stance detection identified and incorporated into the learning process.                                                 |
+| **6. Training**           | BERT models fine-tuned using the identified significant stance tokens from the collected tweets. Different fine-tuning strategies, including continuous fine-tuning with KE-MLM, were experimented with.                             |
+| **7. Evaluation**         | Models evaluated on stance-labeled datasets for each candidate using macro-average F1 score. Analysis included comparison with original pre-trained BERT and models with standard fine-tuning using election data.                     |
+| **8. Outcome**            | The KE-MLM approach showed improved performance in stance detection over other methods. The paper proposes the method as a novel and effective approach for incorporating important context-specific stance words into the ML process. |
 
 ## Sample Code 
 ```python
