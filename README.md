@@ -581,6 +581,34 @@ The goal of this milestone is to train and fine-tune an existing BERT model from
 - Check that the model saves checkpoints correctly.
 - Ensure that the metrics (accuracy, precision, recall, F1 score) are logged to MLflow.
 
+## Additional Testing Categories
+
+### AB Testing
+- **Compare Model Performance:** Evaluate model performance metrics (e.g., accuracy, precision) between different hyperparameter settings.
+- **Model Selection:** Validate that the better-performing model is correctly identified and selected.
+
+### Business Testing
+- **Model Application and Impact Assessment:** Evaluate the model's predictions in the context of real-world business scenarios. Focus on the quantification of the impact, particularly the cost implications of model predictions. This includes assessing the costs associated with false positives and false negatives.
+- **Metric Validation and Performance Analysis:** Ensure the accuracy of business metrics and conduct an in-depth analysis of performance metrics such as accuracy, precision, recall, and F1 score. Use these metrics to understand the model's effectiveness in various business contexts.
+- **Threshold Verification:** Implement a verification process to ensure that all critical performance metrics (accuracy, precision, recall, F1 score) meet a predefined threshold (e.g., 70%). This step is crucial to confirm the model's suitability for business needs.
+- **Comprehensive Metrics Reporting:** Combine both business-centric metrics (like total cost due to misclassification) and model performance metrics in a unified report. This approach provides a holistic view of the model's business utility and predictive performance.
+
+### Implementation Details
+The `business_testing` step in the pipeline encompasses both the calculation of business impact metrics (like false positives/negatives and associated costs) and the evaluation of model performance (accuracy, precision, recall, F1 score). This step also includes a critical check to ensure that performance metrics surpass a certain threshold, signifying the model's reliability and applicability in business scenarios. The output is a comprehensive dictionary of metrics that offers insights into both business implications and model efficacy.
+
+### Infrastructure Testing
+- **Robustness and Scalability:** Assess the robustness and scalability of the data storage and processing infrastructure.
+- **Performance Validation:** Validate the system's performance under varying load conditions.
+
+### Integration Testing
+- **Pipeline Integration:** Verify seamless integration between different pipeline steps and external systems (e.g., databases, MLflow).
+- **Data Flow and Deployment:** Test data flow and model deployment in a simulated or staging environment.
+
+### General Testing Strategy
+Each category of testing may require a combination of unit tests, integration tests, and, in some cases, manual verification. Automated testing can be implemented using a framework like Pytest to ensure that each component of the pipeline behaves as expected under various scenarios. Manual testing, particularly for visualization and business-specific scenarios, is crucial for direct output inspection. Adopting this comprehensive testing approach ensures the robustness, accuracy, and efficiency of your data processing and modeling pipeline.
+
+
+
 ## Integration and End-to-End Tests
 
 - Run the entire pipeline to ensure all steps integrate correctly.
