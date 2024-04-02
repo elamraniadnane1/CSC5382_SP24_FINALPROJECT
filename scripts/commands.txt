@@ -1,0 +1,32 @@
+zenml connect --url http://localhost:8080
+
+pip install "zenml[server]==0.56.1"
+
+pip check zenml[server]
+
+docker exec -it wonderful_sl cqlsh
+
+CREATE KEYSPACE "keyspace"
+WITH replication = {'class': 'SimpleStrategy', 'replication_factor' : 1};
+DESCRIBE keyspaces;
+
+mlflow ui
+
+dino-admin.ddns.net
+
+zenml integration install feast
+
+zenml stack register custom_stack -e mlflow_experiment_tracker ... --set
+zenml experiment-tracker register mlflow_experiment_tracker --flavor=mlflow
+
+docker run -p 9042:9042 cassandra
+zenml 0.56.2 requires click<8.1.4,>=8.0.1, but you have click 8.1.7 which is incompatible.
+Successfully installed click-8.1.7
+
+Install ZenML
+
+pip install "zenml[templates]==0.56.2"
+
+Login to your ZenML Cloud tenant
+
+zenml connect --url https://1947a1bf-zenml.cloudinfra.zenml.io

@@ -8,7 +8,6 @@ import torch
 from torch.utils.data import DataLoader, TensorDataset
 from transformers import BertForSequenceClassification, BertTokenizer
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
-from sklearn.metrics import confusion_matrix, accuracy_score, recall_score, precision_score
 import numpy as np
 from transformers import BertForSequenceClassification, BertTokenizer
 import torch
@@ -75,8 +74,8 @@ from cassandra.policies import DCAwareRoundRobinPolicy
 import pytest
 
 # Constants and Hyperparameters
-CSV_FILE_PATH = 'C:\\Users\\LENOVO\\Desktop\\CSC5356_SP24\\scripts\\dataset.csv'
-PRETRAINED_LM_PATH = 'C:\\Users\\LENOVO\\Desktop\\bert-election2020-twitter-stance-biden'
+CSV_FILE_PATH = 'C:\\Users\\LENOVO\\Desktop\\SP24\\scripts\\dataset.csv'
+PRETRAINED_LM_PATH = 'C:\\Users\\LENOVO\\Desktop\\SP24\\bert-election2020-twitter-stance-biden'
 HYPERPARAMS = {
     "batch_size": 4,             # Batch size for training
     "learning_rate": 1e-5,       # Learning rate for the optimizer
@@ -465,98 +464,24 @@ def feature_engineering(data: pd.DataFrame) -> pd.DataFrame:
         # Ensure the Cassandra connection is always closed
         session.shutdown()
         cluster.shutdown()
-def compute_confusion_matrix(true_labels, predictions):
-    """
-    Computes the confusion matrix.
-    
-    Args:
-    true_labels (array): Array of true labels.
-    predictions (array): Array of model predictions.
 
-    Returns:
-    ndarray: Confusion matrix.
-    """
-    return confusion_matrix(true_labels, predictions)
-
-def compute_accuracy(true_labels, predictions):
-    """
-    Computes the accuracy score.
-    
-    Args:
-    true_labels (array): Array of true labels.
-    predictions (array): Array of model predictions.
-
-    Returns:
-    float: Accuracy score.
-    """
-    return accuracy_score(true_labels, predictions)
-
-def compute_recall(true_labels, predictions):
-    """
-    Computes the recall score.
-    
-    Args:
-    true_labels (array): Array of true labels.
-    predictions (array): Array of model predictions.
-
-    Returns:
-    float: Recall score.
-    """
-    return recall_score(true_labels, predictions, average='macro')
-
-def compute_precision(true_labels, predictions):
-    """
-    Computes the precision score.
-    
-    Args:
-    true_labels (array): Array of true labels.
-    predictions (array): Array of model predictions.
-
-    Returns:
-    float: Precision score.
-    """
-    return precision_score(true_labels, predictions, average='macro')
-
-def evaluate_model(model, data_loader, device):
+def evaluate_model(model, data_loader):
     model.eval()
     val_labels = []
     val_preds = []
+    total_val_loss = 0
     with torch.no_grad():
-        try:
-            for batch in data_loader:
-                # Ensure all tensors are on the same device
-                input_ids, attention_mask, labels = batch
-                input_ids = input_ids.to(device)
-                attention_mask = attention_mask.to(device)
-                labels = labels.to(device)
-
-                outputs = model(input_ids, attention_mask=attention_mask)
-                logits = outputs.logits
-                val_labels.extend(labels.cpu().numpy())
-                val_preds.extend(torch.argmax(logits, axis=1).cpu().numpy())
-        except Exception as e:
-            print(f"An error occurred during evaluation: {e}")
-            return None
-
-    # Compute detailed metrics
-    report = classification_report(val_labels, val_preds, output_dict=True)
-    f1 = report['macro avg']['f1-score']
-    cm = compute_confusion_matrix(val_labels, val_preds)
-    accuracy = compute_accuracy(val_labels, val_preds)
-    recall = compute_recall(val_labels, val_preds)
-    precision = compute_precision(val_labels, val_preds)
-
-    # Include metrics for each class if necessary
-    detailed_metrics = {f'class_{k}': v for k, v in report.items() if k.isdigit()}
-
-    return {
-        'confusion_matrix': cm, 
-        'accuracy': accuracy, 
-        'precision': precision, 
-        'recall': recall, 
-        'f1': f1,
-        'detailed_metrics': detailed_metrics
-    }
+        for batch in data_loader:
+            input_ids, attention_mask, labels = batch
+            outputs = model(input_ids, attention_mask=attention_mask)
+            logits = outputs.logits
+            val_labels.extend(labels.numpy())
+            val_preds.extend(np.argmax(logits.numpy(), axis=1))
+    accuracy = accuracy_score(val_labels, val_preds)
+    precision = precision_score(val_labels, val_preds, average='macro')
+    recall = recall_score(val_labels, val_preds, average='macro')
+    f1 = f1_score(val_labels, val_preds, average='macro')
+    return {'accuracy': accuracy, 'precision': precision, 'recall': recall, 'f1': f1}
 
 
 from tqdm.notebook import tqdm
@@ -796,7 +721,7 @@ def train_model(data: pd.DataFrame,train_data: pd.DataFrame, val_data: pd.DataFr
                 epoch_model_path = os.path.join(checkpoint_dir, f"model_epoch_{epoch}.pt")
                 torch.save(model.state_dict(), epoch_model_path)
                 # Log the checkpoint in MLflow
-                mlflow.log_artifact(epoch_model_path)
+                #mlflow.log_artifact(epoch_model_path)
                 # Early stopping check
                 if val_loss < best_val_loss:
                     best_val_loss = val_loss
@@ -805,8 +730,6 @@ def train_model(data: pd.DataFrame,train_data: pd.DataFrame, val_data: pd.DataFr
                     no_improvement_epochs += 1
                     if no_improvement_epochs >= early_stopping_threshold:
                         print(f"Early stopping triggered at epoch {epoch}")
-                        torch.save(model.state_dict(), epoch_model_path)
-                        mlflow.log_artifact("C:\\Users\\LENOVO\\Desktop\\SP24\\scripts\\model_checkpoints")
                         break
                 torch.save(model.state_dict(), epoch_model_path)
                 mlflow.log_artifact("C:\\Users\\LENOVO\\Desktop\\SP24\\scripts\\model_checkpoints")
