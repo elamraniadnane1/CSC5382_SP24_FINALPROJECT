@@ -1,7 +1,0 @@
-artifact_location: file:///home/dino/Desktop/SP24/mlruns/185790003142579820
-creation_time: 1709032911276
-experiment_id: '185790003142579820'
-last_update_time: 1709050789399
-lifecycle_stage: deleted
-name: HuggingFace Model Prediction
-tags: {}
