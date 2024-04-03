@@ -5,7 +5,7 @@ pip install "zenml[server]==0.56.1"
 pip check zenml[server]
 
 docker exec -it wonderful_sl cqlsh
-
+DROP KEYSPACE "keyspace";
 CREATE KEYSPACE "keyspace"
 WITH replication = {'class': 'SimpleStrategy', 'replication_factor' : 1};
 DESCRIBE keyspaces;
@@ -30,3 +30,12 @@ pip install "zenml[templates]==0.56.2"
 Login to your ZenML Cloud tenant
 
 zenml connect --url https://1947a1bf-zenml.cloudinfra.zenml.io
+
+cqlsh> DROP KEYSPACE "keyspace";
+cqlsh> CREATE KEYSPACE "keyspace"
+   ... WITH replication = {'class': 'SimpleStrategy', 'replication_factor' : 1};
+cqlsh> CREATE TABLE "keyspace".features (
+   ...     id UUID PRIMARY KEY,
+   ...     tokens list<int>,
+   ...     label text
+   ... );
