@@ -1,0 +1,15 @@
+artifact_uri: file:///c:/Users/LENOVO/Desktop/CSC5356_SP24/scripts/mlruns/423375418748076404/6eca4db7f3c24b1086fa87de2a0acf20/artifacts
+end_time: 1712146030728
+entry_point_name: ''
+experiment_id: '423375418748076404'
+lifecycle_stage: active
+run_id: 6eca4db7f3c24b1086fa87de2a0acf20
+run_name: capable-auk-759
+run_uuid: 6eca4db7f3c24b1086fa87de2a0acf20
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1712145695449
+status: 4
+tags: []
+user_id: LENOVO
