@@ -651,6 +651,40 @@ Each category of testing may require a combination of unit tests, integration te
 
 The objective of this phase is to establish a robust system architecture for deploying a machine learning model capable of analyzing tweets. Our solution leverages a local machine environment, utilizing tools such as ZenML for workflow management, Hugging Face's Transformers for model capabilities, Docker for containerization, and web frameworks like FastAPI and Flask for serving the model. Additionally, a React frontend will be developed to interact with the model.
 
++-----------------------------------------------------------------------------------------------------+
+|                                              ARCHITECTURE                                           |
++----------------------+         +----------------------+        +-------------------------------------------+
+|                      |         |                      |        |                                            |
+|   Data Collection    +-------->+  Data Preprocessing  +------->+   Model Training , Validation & Testing    |
+|  (Tweets & Articles) |         | (ZenML Pipeline)     |        |  (Hugging Face Transformers, ZenML, Pytest)|
+|  Storage : Local/HDFS|         |                      |        |                                            |
++-----------+----------+         +-----------+----------+        +-----------------+-------------------------+
+            ^                                 |                                    |
+            |                                 |                                    v
+            |                                 v                                  +-------------------+
+            |                                                                      |                   |
+            |                                 |                                    |   Model Serving   |
+            |                                 |                                    | (FastAPI, Flask)  |
+            |                                 |                                    |                   |
+            |                                 |                                    +---------+---------+
++-----------+----------+         +-----------+----------+                                  |
+|                      |         |                      |                                  v
+|    React Frontend    <---------+   Docker Container   <----------------------------------+  
+|  (User Interface)    |         | (Deployment & Run)   |                                   
+|                      |         |                      |                                +-------------------+
++----------------------+         +----------------------+                               |                   |
+                                                                                        |  Frontend          |
+                                                                                        |  Interaction       |
+                                                                                        |  (User inputs,     |
+                                                                                        |  Display results)  |
+                                                                                        |                   |
+                                                                                        +-------------------+
+
++---------------+    |
+|   | Storage        |                                                        |
+|   | (Local Machine)|                                                        |
+|   +---------------+ 
+
 ## System Components
 
 ### Data Storage
