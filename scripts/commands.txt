@@ -30,6 +30,7 @@ pip install "zenml[templates]==0.56.2"
 Login to your ZenML Cloud tenant
 
 zenml connect --url https://1947a1bf-zenml.cloudinfra.zenml.io
+zenml connect --url=https://1947a1bf-zenml.cloudinfra.zenml.io
 
 cqlsh> DROP KEYSPACE "keyspace";
 cqlsh> CREATE KEYSPACE "keyspace"
@@ -39,3 +40,5 @@ cqlsh> CREATE TABLE "keyspace".features (
    ...     tokens list<int>,
    ...     label text
    ... );
+
+curl -X POST http://localhost:8000/predict -H "Content-Type: application/json" -d "{\"text\":\"We love Biden\"}"

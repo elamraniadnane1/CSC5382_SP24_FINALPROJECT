@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Prediction Interface</title>
+</head>
+<body>
+    <h1>Text Prediction</h1>
+    <form id="predictionForm">
+        <label for="inputText">Enter text:</label>
+        <input type="text" id="inputText" name="inputText" required>
+        <button type="submit">Predict</button>
+    </form>
+    <div id="predictionResult"></div>
+
+    <script>
+        document.getElementById('predictionForm').onsubmit = async function(event) {
+            event.preventDefault(); // Prevent the default form submission
+            const inputText = document.getElementById('inputText').value;
+            const data = { text: inputText };
+
+            const response = await fetch('http://localhost:8000/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+            document.getElementById('predictionResult').innerText = 'Prediction: ' + result.predicted_class;
+        }
+    </script>
+</body>
+</html>
