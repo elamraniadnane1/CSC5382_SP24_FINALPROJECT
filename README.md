@@ -650,7 +650,7 @@ Each category of testing may require a combination of unit tests, integration te
 ## Objective
 
 The objective of this phase is to establish a robust system architecture for deploying a machine learning model capable of analyzing tweets. Our solution leverages a local machine environment, utilizing tools such as ZenML for workflow management, Hugging Face's Transformers for model capabilities, Docker for containerization, and web frameworks like FastAPI and Flask for serving the model. Additionally, a React frontend will be developed to interact with the model.
-
+```
 +-----------------------------------------------------------------------------------------------------+
 |                                              ARCHITECTURE                                           |
 +----------------------+         +----------------------+        +-------------------------------------------+
@@ -684,7 +684,7 @@ The objective of this phase is to establish a robust system architecture for dep
 |   | Storage        |                                                        |
 |   | (Local Machine)|                                                        |
 |   +---------------+ 
-
+```
 ## System Components
 
 ### Data Storage
