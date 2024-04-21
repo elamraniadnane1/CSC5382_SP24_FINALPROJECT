@@ -645,6 +645,67 @@ Each category of testing may require a combination of unit tests, integration te
 6. **Improvement Over Baselines:**
    - Comparing the performance metrics (accuracy, precision, recall) of the new model against baselines provides a direct measure of improvement. Higher values of these metrics for the new model indicate its superiority over existing models and baselines.
 
-# MILESTONE 5: Model Deployment (1/2)
+# Milestone 5 Report: Model Deployment (1/2) - System Architecture Definition
+
+## Objective
+
+The objective of this phase is to establish a robust system architecture for deploying a machine learning model capable of analyzing tweets. Our solution leverages a local machine environment, utilizing tools such as ZenML for workflow management, Hugging Face's Transformers for model capabilities, Docker for containerization, and web frameworks like FastAPI and Flask for serving the model. Additionally, a React frontend will be developed to interact with the model.
+
+## System Components
+
+### Data Storage
+
+- **Local Storage**: Tweets are stored locally. This choice simplifies the initial setup and minimizes the complexity of handling data across distributed systems.
+
+### Model Training and Management
+
+- **Hugging Face Transformers**: Provides pre-trained BERT models which are fine-tuned for classifying tweets based on sentiment or stance.
+- **ZenML**: Manages the ML pipeline, ensuring reproducibility and scalability. ZenML steps will handle data preprocessing, model training, hyperparameter tuning, and evaluation.
+
+### Model Serving
+
+- **FastAPI**: Chosen for its asynchronous capabilities and ease of use in building robust APIs. It will handle real-time model inference.
+- **Flask**: Utilized as an alternative or in conjunction to FastAPI for serving HTML templates or other web server tasks.
+
+### Frontend
+
+- **React**: Provides a dynamic user interface to interact with the deployed model. This setup will allow users to input tweets and display sentiment analysis results in real-time.
+
+### Containerization
+
+- **Docker**: All components of the application, including ZenML pipelines, FastAPI/Flask servers, and the React app, will be containerized using Docker. This ensures consistency across different development and production environments and simplifies deployment processes.
+
+## Deployment Flow
+
+### Data Handling
+
+Tweets are stored on the local machine and are processed using a ZenML pipeline to prepare the data for training and inference.
+
+### Model Training
+
+Using ZenML, train a BERT model from Hugging Face with the preprocessed tweet data. The training process includes model optimization and validation.
+
+### Model Deployment
+
+The trained model is wrapped into a FastAPI or Flask application. This application provides an HTTP interface for model inference.
+
+### Containerization
+
+Dockerize the ML model, FastAPI/Flask app, and the React frontend. Each component runs in its own Docker container, ensuring isolation and ease of deployment.
+
+### Frontend Interaction
+
+The React application communicates with the FastAPI/Flask backend through HTTP requests. Users can submit tweets through the frontend, which are then sent to the backend for sentiment analysis, and results are displayed in real-time.
+
+## Challenges and Considerations
+
+- **Data Privacy**: Ensuring that the storage and processing of tweets comply with data privacy laws and regulations.
+- **Scalability**: While the initial deployment is on localhost, the architecture should support scaling to cloud environments if needed.
+- **Error Handling**: Robust error handling mechanisms in the FastAPI/Flask application to manage exceptions and provide meaningful error messages to the frontend.
+- **Security**: Implement security best practices, particularly for API interactions to protect against common vulnerabilities.
+
+## Conclusion
+
+This architecture provides a comprehensive blueprint for deploying a machine learning system on a local machine with modern tools and technologies. By following this plan, we ensure a scalable, reproducible, and efficient deployment of our ML model, capable of delivering real-time tweet sentiment analysis through a user-friendly web interface.
 
 
