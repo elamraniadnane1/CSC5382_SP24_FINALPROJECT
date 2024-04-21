@@ -645,4 +645,6 @@ Each category of testing may require a combination of unit tests, integration te
 6. **Improvement Over Baselines:**
    - Comparing the performance metrics (accuracy, precision, recall) of the new model against baselines provides a direct measure of improvement. Higher values of these metrics for the new model indicate its superiority over existing models and baselines.
 
+# MILESTONE 5: Model Deployment (1/2)
+
 
