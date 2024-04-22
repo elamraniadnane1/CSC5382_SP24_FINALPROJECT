@@ -10,6 +10,13 @@ CREATE KEYSPACE "keyspace"
 WITH replication = {'class': 'SimpleStrategy', 'replication_factor' : 1};
 DESCRIBE keyspaces;
 
+CREATE TABLE keyspace.features (
+    id uuid PRIMARY KEY,
+    tokens list<int>,
+    label int
+);
+
+
 mlflow ui
 
 dino-admin.ddns.net
@@ -33,12 +40,24 @@ zenml connect --url https://1947a1bf-zenml.cloudinfra.zenml.io
 zenml connect --url=https://1947a1bf-zenml.cloudinfra.zenml.io
 
 cqlsh> DROP KEYSPACE "keyspace";
-cqlsh> CREATE KEYSPACE "keyspace"
-   ... WITH replication = {'class': 'SimpleStrategy', 'replication_factor' : 1};
+cqlsh> CREATE KEYSPACE "keyspace" WITH replication = {'class': 'SimpleStrategy', 'replication_factor' : 1};
 cqlsh> CREATE TABLE "keyspace".features (
    ...     id UUID PRIMARY KEY,
    ...     tokens list<int>,
    ...     label text
    ... );
 
+
+CREATE TABLE "keyspace".features (
+    id UUID PRIMARY KEY,
+    tokens list<int>,
+    label text
+);
+
+
+
 curl -X POST http://localhost:8000/predict -H "Content-Type: application/json" -d "{\"text\":\"We love Biden\"}"
+
+docker build -t my-fastapi-app .
+
+docker run -p 8000:8000 my-fastapi-app

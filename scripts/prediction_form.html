@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predict Text</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif; /* Sets the font for the page */
+            background: #f4f4f9; /* Light grey background */
+            margin: 40px; /* Adds margin around the body */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Adds a subtle shadow around the form */
+            margin-bottom: 20px;
+        }
+        label, textarea, button {
+            display: block;
+            width: 100%;
+            margin-top: 10px;
+        }
+        textarea {
+            height: 100px; /* Sets a fixed height for the textarea */
+            padding: 8px; /* Adds padding inside the textarea */
+            border: 1px solid #ccc; /* Adds a border around the textarea */
+            border-radius: 4px; /* Rounds the corners of the textarea */
+        }
+        button {
+            background-color: #0056b3; /* Sets a blue background color for the button */
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer; /* Makes the mouse cursor turn into a pointer when over the button */
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #004494; /* Changes button color when hovered */
+        }
+        .info {
+            width: 80%;
+            text-align: left;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #e7e7e7;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Submit Text for Prediction</h1>
+        <form action="/predict/" method="post">
+            <label for="text">Enter your text:</label>
+            <textarea id="text" name="text" placeholder="Type your text here..." required></textarea>
+            <button type="submit">Predict</button>
+        </form>
+        <div class="info">
+            <h2>Label Descriptions:</h2>
+            <ul>
+                <li><strong>0 - Negative:</strong> The text expresses a negative sentiment or stance.</li>
+                <li><strong>1 - Positive:</strong> The text expresses a positive sentiment or supportive stance.</li>
+                <li><strong>2 - Neutral:</strong> The text is neutral, showing neither positive nor negative sentiment.</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        document.getElementById('text').oninput = function() {
+            if (this.value.length > 500) {
+                alert('Text too long. Maximum allowed characters is 500.');
+                this.value = this.value.substring(0, 500);
+            }
+        };
+    </script>
+</body>
+</html>
