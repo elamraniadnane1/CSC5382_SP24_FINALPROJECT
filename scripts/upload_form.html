@@ -51,19 +51,23 @@
         <h1>Upload a CSV File</h1>
         <label for="file">Choose a CSV file to upload:</label>
         <input type="file" id="file" name="file" accept=".csv" required>
+        <span id="file-name"></span>
         <button type="submit">Upload File</button>
     </form>
     <script>
-        document.getElementById('file').onchange = function () {
-            if (this.files && this.files.length) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    if (!e.target.result.includes('data:application/vnd.ms-excel')) {
-                        alert('Please select a valid CSV file.');
-                        document.getElementById('file').value = ''; // Clear the input
-                    }
-                };
-                reader.readAsDataURL(this.files[0]);
+        const fileInput = document.getElementById('file');
+        const fileNameDisplay = document.getElementById('file-name');
+
+        fileInput.onchange = function () {
+            if (this.files && this.files.length > 0) {
+                const file = this.files[0];
+                if (file.type !== "text/csv") {
+                    alert('Please select a valid CSV file.');
+                    fileInput.value = ''; // Clear the input
+                    fileNameDisplay.textContent = ''; // Clear the file name display
+                } else {
+                    fileNameDisplay.textContent = `Selected file: ${file.name}`;
+                }
             }
         };
     </script>
