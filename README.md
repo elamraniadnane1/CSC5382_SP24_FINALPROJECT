@@ -3,27 +3,6 @@
 ### SPRING2024_PROJECT_MODELCARD_ARTIFICIALINTELLIGENCE_FOR_DIGITAL_TRANSFORMATION
 ### By : Adnane El Amrani
 
-## Table of Contents
-1. [Business Case](#business-case)
-2. [Business Value of Using ML (Impact)](#business-value-of-using-ml-impact)
-3. [ML Framing](#ml-framing)
-4. [Data Requirements](#data-requirements)
-5. [Feasibility including specification of a baseline](#feasibility-including-specification-of-a-baseline)
-6. [Choice Justification](#choice-justification)
-7. [Paper Methodology](#paper-methodology)
-8. [Sentiment Analysis](#sentiment-analysis)
-9. [Stance Detection](#stance-detection)
-10. [Importance of Both Tasks](#importance-of-both-tasks)
-11. [Model Card for the Baseline](#model-card-for-the-baseline)
-12. [Sample Code](#sample-code)
-13. [Datasets and Tools](#datasets-and-tools)
-14. [Metrics for Business Goal Evaluation](#metrics-for-business-goal-evaluation)
-15. [Milestone 2: AI System Development (2/3)](#milestone-2-ai-system-development-23)
-16. [Milestone 3&4: AI System Development (3/3)](#milestone-34-ai-system-development-33)
-17. [Parallel Pipeline](#parallel-pipeline)
-18. [Pytest Setup Guide](#pytest-setup-guide)
-19. [Other References](#other-references)
-
 ## Business Case
 
 The objective is to develop an ML model to predict the outcome of the 2024 U.S. presidential election based on sentiment analysis of publicly available text data that in form of Tweets. 
@@ -756,27 +735,33 @@ This architecture provides a comprehensive blueprint for deploying a machine lea
 ### Overview
 In this milestone, we set up a Continuous Integration/Continuous Deployment (CI/CD) pipeline for our machine learning project. This CI/CD pipeline is designed to automate testing, building, and deploying phases of our machine learning application, ensuring that updates are smoothly integrated and deployed.
 
-Purpose of the CI/CD Pipeline
+# Purpose of the CI/CD Pipeline
 The primary purpose of this CI/CD pipeline is to automate the testing and deployment phases of a machine learning project that utilizes ZenML. This automation includes:
 
-Running the ZenML pipeline upon code changes to ensure that new commits do not break existing functionality.
-Using services like Cassandra and MLflow within the GitHub Actions environment, which are essential for the operation of the ML pipeline.
-Ensuring the whole ML workflow, from data processing to model training and logging metrics, is functioning as expected every time there is a new push or pull request on the main branch.
-How the Pipeline Works
-Trigger Events: The pipeline is triggered by any push or pull_request events targeting the main branch. This ensures that the pipeline is run on the latest code, helping to catch issues early in the development cycle.
-Run Environment: The job is set to run on the latest version of Ubuntu (ubuntu-latest).
-Service Setup: A Cassandra database is set up as a service. This service uses the latest Cassandra image, with specified ports and health checks. This setup is crucial for the pipeline that requires a Cassandra database to operate.
-Steps in the Workflow:
-Code Checkout: Uses actions/checkout@v2 to clone the repository into the GitHub Actions runner, ensuring the most recent code is used for the pipeline execution.
-Python Setup: Configures the Python environment (version 3.9) required to run the ZenML pipeline.
-Dependency Installation: Installs all required Python packages from requirements.txt, which might include ZenML and other dependencies necessary for running the ML pipeline.
-ZenML Pipeline Execution: The pipeline executes the ZenML setup command and runs a Python notebook (final_notebook.ipynb) which likely contains the code for setting up and running ML models. The environment variable for the Cassandra cluster is set to localhost, pointing to the previously configured Cassandra service.
-Shutdown ZenML Services: Regardless of the previous step's success or failure (if: always()), this command ensures that any services or resources initiated by ZenML are properly shut down to free up resources and prevent any leaks.
-Metrics Logging: Installs MLflow and starts an MLflow server to log metrics from the executed ZenML pipeline. This step is critical for tracking the performance of the machine learning models and experiments over time.
-File Creation
-The script programmatically creates the necessary directories (if they don't exist) and writes this workflow definition into a file named zenml_pipeline.yml within the .github/workflows directory. This automation within the script facilitates easy setup and maintenance of the CI/CD workflow configuration without manual file handling.
+* Running the ZenML pipeline upon code changes to ensure that new commits do not break existing functionality.
+* Using services like Cassandra and MLflow within the GitHub Actions environment, which are essential for the operation of the ML pipeline.
+* Ensuring the whole ML workflow, from data processing to model training and logging metrics, is functioning as expected every time there is a new push or pull request on the main branch.
 
-Conclusion
+# How the Pipeline Works
+## Trigger Events
+The pipeline is triggered by any push or pull_request events targeting the main branch. This ensures that the pipeline is run on the latest code, helping to catch issues early in the development cycle.
+
+## Run Environment
+The job is set to run on the latest version of Ubuntu (ubuntu-latest).
+
+## Service Setup
+A Cassandra database is set up as a service. This service uses the latest Cassandra image, with specified ports and health checks. This setup is crucial for the pipeline that requires a Cassandra database to operate.
+
+# Steps in the Workflow
+1. **Code Checkout:** Uses actions/checkout@v2 to clone the repository into the GitHub Actions runner, ensuring the most recent code is used for the pipeline execution.
+2. **Python Setup:** Configures the Python environment (version 3.9) required to run the ZenML pipeline.
+3. **Dependency Installation:** Installs all required Python packages from requirements.txt, which might include ZenML and other dependencies necessary for running the ML pipeline.
+4. **ZenML Pipeline Execution:** The pipeline executes the ZenML setup command and runs a Python notebook (final_notebook.ipynb) which likely contains the code for setting up and running ML models. The environment variable for the Cassandra cluster is set to localhost, pointing to the previously configured Cassandra service.
+5. **Shutdown ZenML Services:** Regardless of the previous step's success or failure (`if: always()`), this command ensures that any services or resources initiated by ZenML are properly shut down to free up resources and prevent any leaks.
+6. **Metrics Logging:** Installs MLflow and starts an MLflow server to log metrics from the executed ZenML pipeline. This step is critical for tracking the performance of the machine learning models and experiments over time.
+
+# File Creation
+The script programmatically creates the necessary directories (if they don't exist) and writes this workflow definition into a file named zenml_pipeline.yml within the .github/workflows directory. This automation within the script facilitates easy setup and maintenance of the CI/CD workflow configuration without manual file handling.
 
 ### CI/CD Pipeline Configuration
 
