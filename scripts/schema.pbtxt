@@ -1,6 +1,7 @@
 feature {
   name: "text"
   type: BYTES
+  domain: "text"
   presence {
     min_fraction: 1.0
     min_count: 1
@@ -14,6 +15,8 @@ feature {
 feature {
   name: "label"
   type: INT
+  bool_domain {
+  }
   presence {
     min_fraction: 1.0
     min_count: 1
@@ -36,4 +39,14 @@ feature {
       size: 1
     }
   }
+}
+string_domain {
+  name: "text"
+  value: ".@USER on covid-19: we\'ll put the politics aside. we\'ll take the muzzle off the experts so the the public gets the information they need and deserve. honest unvarnished truth. they can handle it. #demconvention @USER HTTP"
+  value: "@USER was it the infanticide lie the nun dropped on us that was helpful?\n#rnc2020"
+  value: "am i the only one that pictures biden this way all the time? #demdebate HTTP"
+  value: "biden is mostly campaigning for the general election, not debating bernie. #democraticdebate"
+  value: "listened to both these guys for 2 hours tonight. much of what i heard is more big government that promises free/free/free, open borders, killing the oil industry and more. thanks, but we went through 8 years of that with obama and many of us do not want to go back.... #demdebate"
+  value: "so jazzed to get to meet future u.s.rep @USER &amp; u.s.sen. @USER at 11:30 today at stonebridge park in fayetteville. #2020election"
+  value: "you know how they say anyone can be president? it\'s not true. trump tried it and he couldn\'t do it. he is literally unable to do the job. so maybe we should give it to someone else\n\n#trumpisaloser #biden2020"
 }

@@ -75,7 +75,7 @@ from cassandra.policies import DCAwareRoundRobinPolicy
 import pytest
 
 # Constants and Hyperparameters
-CSV_FILE_PATH = 'C:\\Users\\LENOVO\\Desktop\\CSC5356_SP24\\scripts\\dataset.csv'
+CSV_FILE_PATH = 'C:\\Users\\LENOVO\\Desktop\\CSC5382_SP24_FINALPROJECT\\scripts\\dataset_reduced.csv'
 PRETRAINED_LM_PATH = 'C:\\Users\\LENOVO\\Desktop\\bert-election2020-twitter-stance-biden'
 HYPERPARAMS = {
     "batch_size": 4,             # Batch size for training
