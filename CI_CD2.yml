@@ -1,0 +1,41 @@
+name: Python ML Model CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.8'  # Set the Python version here
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install torch transformers pandas numpy sklearn matplotlib seaborn mlflow tweepy tensorflow tensorflow_data_validation cassandra-driver pytest
+
+      - name: Install BERT Model and Tokenizer
+        run: |
+          python -m pip install transformers
+          # Example of model installation if needed; customize as necessary
+          # python -m transformers.cli --model bert-base-uncased
+
+      - name: Run tests
+        run: |
+          pytest
+
+      - name: Log Model
+        run: |
+          # Add MLflow or any other commands to log model metrics, parameters, etc.
+          mlflow run .
