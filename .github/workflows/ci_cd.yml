@@ -1,5 +1,4 @@
-
-    name: ZenML Pipeline Execution
+name: ZenML Pipeline Execution
 
 on:
   push:
@@ -18,7 +17,11 @@ jobs:
         image: cassandra:latest
         ports:
           - 9042:9042
-        options: --health-cmd "cqlsh -e 'DESCRIBE KEYSPACES'" --health-interval 10s --health-timeout 5s --health-retries 5
+        options: >
+          --health-cmd "cqlsh -e 'DESCRIBE KEYSPACES'" 
+          --health-interval 10s 
+          --health-timeout 5s 
+          --health-retries 5
 
     steps:
       - uses: actions/checkout@v2
@@ -35,20 +38,18 @@ jobs:
 
       - name: Run ZenML Pipeline
         run: |
-          python -m zenml up
-          python final_notebook.ipynb
+          zenml up
+          zenml run
         env:
           CASSANDRA_CLUSTER: "localhost"
 
       - name: Shutdown ZenML services
         if: always()
-        run: python -m zenml down
+        run: zenml down
 
       - name: Log Metrics to MLflow
         run: |
           pip install mlflow
-          mlflow server --backend-store-uri sqlite:///mlflow.db --default-artifact-root ./mlruns --host
+          mlflow server --backend-store-uri sqlite:///mlflow.db --default-artifact-root ./mlruns --host 0.0.0.0 --port 5000
         env:
           MLFLOW_TRACKING_URI: http://localhost:5000
-
-    
