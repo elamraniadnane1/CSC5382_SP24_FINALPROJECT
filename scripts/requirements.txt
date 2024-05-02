@@ -4,3 +4,9 @@ transformers
 pandas
 torch
 jinja2
+fastapi
+uvicorn
+transformers
+pandas
+nest_asyncio
+torch

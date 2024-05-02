@@ -58,6 +58,7 @@ CREATE TABLE "keyspace".features (
 
 curl -X POST http://localhost:8000/predict -H "Content-Type: application/json" -d "{\"text\":\"We love Biden\"}"
 
-docker build -t my-fastapi-app .
+docker logs test-fastapi
 
-docker run -p 8000:8000 my-fastapi-app
+docker run -p 8080:8000 --name test-fastapi fastapi-model-server
+
