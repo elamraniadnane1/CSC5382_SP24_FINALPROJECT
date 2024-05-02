@@ -1,0 +1,15 @@
+artifact_uri: file:///c:/Users/LENOVO/Desktop/CSC5382_SP24_FINALPROJECT/scripts/mlruns/864758302963524176/987f40b3edb64f7e8d1acd28a4947fac/artifacts
+end_time: 1714618972658
+entry_point_name: ''
+experiment_id: '864758302963524176'
+lifecycle_stage: active
+run_id: 987f40b3edb64f7e8d1acd28a4947fac
+run_name: bert-election2020-twitter-stance-biden-evaluation
+run_uuid: 987f40b3edb64f7e8d1acd28a4947fac
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1714618970641
+status: 3
+tags: []
+user_id: LENOVO

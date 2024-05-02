@@ -1,0 +1,15 @@
+artifact_uri: file:///c:/Users/LENOVO/Desktop/CSC5382_SP24_FINALPROJECT/scripts/mlruns/288128726514067212/5abf68e0f40343d7b7c5552863404f35/artifacts
+end_time: 1714618265476
+entry_point_name: ''
+experiment_id: '288128726514067212'
+lifecycle_stage: active
+run_id: 5abf68e0f40343d7b7c5552863404f35
+run_name: bert-base-uncased-finetuned
+run_uuid: 5abf68e0f40343d7b7c5552863404f35
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1714618263466
+status: 4
+tags: []
+user_id: LENOVO

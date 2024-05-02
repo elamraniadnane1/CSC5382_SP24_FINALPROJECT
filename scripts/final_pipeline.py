@@ -74,6 +74,11 @@ import logging
 from cassandra.policies import DCAwareRoundRobinPolicy
 import pytest
 
+#Final pipeline until training
+
+
+
+
 # Constants and Hyperparameters
 CSV_FILE_PATH = 'C:\\Users\\LENOVO\\Desktop\\CSC5382_SP24_FINALPROJECT\\scripts\\dataset_reduced.csv'
 PRETRAINED_LM_PATH = 'C:\\Users\\LENOVO\\Desktop\\bert-election2020-twitter-stance-biden'
