@@ -655,18 +655,25 @@ The objective of this phase is to establish a robust system architecture for dep
 |                                              ARCHITECTURE                                           |
 +----------------------+         +----------------------+        +-------------------------------------------+
 |                      |         |                      |        |                                            |
-|   Data Collection    +-------->+  Data Preprocessing  +------->+   Model Training , Validation & Testing    |
+|   Data Collection    +-------->+  Data Preprocessing  +------->+   Model Training , Validation & Testing /Saving   |
 |  (Tweets & Articles) |         | (ZenML Pipeline)     |        |  (Hugging Face Transformers, ZenML, Pytest)|
 |  Storage : Local/HDFS|         |                      |        |                                            |
 +-----------+----------+         +-----------+----------+        +-----------------+-------------------------+
             ^                                 |                                    |
             |                                 |                                    v
-            |                                 v                                  +-------------------+
+                                                                                  +-------------------+
             |                                                                      |                   |
             |                                 |                                    |   Model Serving   |
             |                                 |                                    | (FastAPI, Flask)  |
             |                                 |                                    |                   |
             |                                 |                                    +---------+---------+
+                                                                                     | 
+            |                                 v                                  +----------------------------------------------+
+            |                                                                      |                                            |
+            |                                 |                                    |   Model Evalution & Prediction/Inference   |
+            |                                 |                                    |                                            |
+            |                                 |                                    |                                            |
+            |                                 |                                    +---------+----------------------------------+
 +-----------+----------+         +-----------+----------+                                  |
 |                      |         |                      |                                  v
 |    React Frontend    <---------+   Docker Container   <----------------------------------+  
@@ -741,5 +748,70 @@ The React application communicates with the FastAPI/Flask backend through HTTP r
 ## Conclusion
 
 This architecture provides a comprehensive blueprint for deploying a machine learning system on a local machine with modern tools and technologies. By following this plan, we ensure a scalable, reproducible, and efficient deployment of our ML model, capable of delivering real-time tweet sentiment analysis through a user-friendly web interface.
+
+## Milestone 6: CI/CD Pipeline Setup
+
+### Overview
+In this milestone, we set up a Continuous Integration/Continuous Deployment (CI/CD) pipeline for our machine learning project. This CI/CD pipeline is designed to automate testing, building, and deploying phases of our machine learning application, ensuring that updates are smoothly integrated and deployed.
+
+### CI/CD Pipeline Configuration
+
+The pipeline is configured using GitHub Actions, which automates the workflow by defining jobs in `.yaml` file format. Below is the breakdown of the workflow configuration:
+
+#### `.github/workflows/ml_pipeline_ci_cd.yaml`
+
+```yaml
+name: ML Pipeline CI/CD Workflow
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run tests
+        run: |
+          pytest tests/
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Deploy to Production
+        run: |
+          echo "Deploying to production server"
+          # Add deployment scripts here
 
 
