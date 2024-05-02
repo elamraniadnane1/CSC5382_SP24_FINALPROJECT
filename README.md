@@ -387,6 +387,8 @@ The goal of this milestone is to train and fine-tune an existing BERT model from
 
 2. **Data Preprocessing, Visualization, and Validation**
 
+   - Twitter API Integration: Integrate Twitter API using Tweepy or a similar library.
+   - Data Collection: Define parameters (like keywords, hashtags, date ranges) for collecting tweets related to the US 2024 Elections and Biden's stance.
    - Data Cleaning: Clean the text data in your dataset (remove URLs, special characters, punctuation, etc.).
    - Data Exploration and Visualization:
      - Visualize data distribution, label imbalance, and common words/phrases.
@@ -400,7 +402,7 @@ The goal of this milestone is to train and fine-tune an existing BERT model from
      - Use TFDV to check for anomalies in the validation and test sets.
      - Revise data based on anomaly checks, fixing issues or updating schema as needed.
 
-3. **Feature Engineering and Feature Store Integration**
+4. **Feature Engineering and Feature Store Integration**
 
    - Feature Engineering:
      - Text Tokenization: Tokenize the text using a tokenizer compatible with your BERT model.
@@ -408,7 +410,7 @@ The goal of this milestone is to train and fine-tune an existing BERT model from
    - Feature Store Setup: Establish a feature store to manage and store engineered features efficiently.
    - Storing Features: Save the processed features and labels in the feature store for easy retrieval during model training and inference.
 
-4. **Model Loading, Configuration, and Fine-Tuning**
+5. **Model Loading, Configuration, and Fine-Tuning**
 
    - Load Pretrained Model: Load the pretrained BERT model from PRETRAINED_LM_PATH.
    - BERT Hyperparameters Definition:
@@ -416,23 +418,23 @@ The goal of this milestone is to train and fine-tune an existing BERT model from
    - Model Adaptation: Adapt the model for stance detection.
    - Hyperparameter Tuning: Optimize hyperparameters for best performance.
 
-5. **Model Training and Validation**
+6. **Model Training and Validation**
 
    - Training Process: Train the model using the training set, with MLFlow for experiment tracking.
    - Validation: Continuously validate the model on the validation set.
 
-6. **Model Evaluation and Visualization**
+7. **Model Evaluation and Visualization**
 
    - Evaluation Metrics: Assess the model on the test set, focusing on accuracy, precision, recall, and F1 score.
    - Performance Visualization: Create and interpret various visualizations to understand model performance.
 
-7. **Model Deployment, Monitoring, and Updating**
+8. **Model Deployment, Monitoring, and Updating**
 
    - Deployment Readiness: Prepare and export the model for deployment.
    - Monitoring and Performance Visualization: Monitor and visualize model performance in production.
    - Model Updating: Define strategies for periodic retraining or fine-tuning.
 
-8. **Additional Considerations**
+9. **Additional Considerations**
 
    - Data and Model Versioning: Implement versioning for data and models.
    - Ethical and Fairness Considerations: Focus on fairness and unbiased modeling.
@@ -489,46 +491,6 @@ The goal of this milestone is to train and fine-tune an existing BERT model from
 
 
 
-# Parallel Pipeline
-
-## 1. Environment and Tool Setup
-
-- Tool Setup: Set up Hadoop ecosystem for batch processing.
-- Environment Setup: Ensure Python and necessary libraries (like Tweepy for Twitter API, Hadoop-related libraries, etc.) are installed.
-
-## 2. Tweet Scraping Using Twitter API
-
-- Twitter API Integration: Integrate Twitter API using Tweepy or a similar library.
-- Data Collection: Define parameters (like keywords, hashtags, date ranges) for collecting tweets related to the US 2024 Elections and Biden's stance.
-- Initial Data Store: Store the scraped tweets in a temporary storage or directly load into Hadoop Distributed File System (HDFS).
-
-## 3. ELT Pipeline Setup with Hadoop
-
-- Extract: Extract tweets from the temporary storage or directly from HDFS.
-- Load: Load the extracted tweets into Hadoop's ecosystem (like into HBase or Hive for managed storage).
-- Transform: Perform transformations using tools like Apache Pig or Hive. This includes data cleaning, tokenization, and preparation for the stance detection model.
-
-## 4. Running the Stance Detection Pipeline
-
-- Data Preprocessing: Clean the data (remove URLs, special characters, punctuation, etc.), tokenize text, and encode labels.
-- Feature Engineering: Process the text data to convert it into a suitable format for the BERT model.
-- Model Training and Evaluation: Load the pretrained BERT model, fine-tune it on the processed data, and evaluate its performance.
-
-## 5. Automation and Orchestration
-
-- Orchestration Tool Setup: Use a tool like Apache Airflow or Oozie for orchestrating the workflow.
-- Workflow Definition: Define the sequence of tasks - from tweet scraping, loading data into Hadoop, running transformations, to executing the ML pipeline.
-- Scheduling: Set up the pipeline to run at scheduled intervals or trigger based on specific conditions.
-
-## 6. Monitoring and Logging
-
-- Monitoring: Implement monitoring for each stage of the pipeline to ensure smooth execution.
-- Logging: Use logging mechanisms to record the pipeline's performance and to debug any issues.
-
-## 7. Post-Processing and Storage
-
-- Result Storage: Store the output of the machine learning pipeline, like the classified stances, in a database or a file system for further analysis or reporting.
-- Data Archiving: Archive older data in cost-effective storage solutions if necessary.
 
 # Pytest Setup Guide
 
@@ -540,7 +502,7 @@ The goal of this milestone is to train and fine-tune an existing BERT model from
 
 3. Import the necessary modules including Pytest, pandas, and any specific methods or classes required for testing.
 
-## Testing Steps
+## Unit Testing Steps
 
 ### 1. Testing Data Loading (`load_data` Step)
 
@@ -584,8 +546,48 @@ The goal of this milestone is to train and fine-tune an existing BERT model from
 ## Additional Testing Categories
 
 ### AB Testing
+
 - **Compare Model Performance:** Evaluate model performance metrics (e.g., accuracy, precision) between different hyperparameter settings.
 - **Model Selection:** Validate that the better-performing model is correctly identified and selected.
+
+A/B testing, in this context, is a method used to compare two versions of a machine learning model to determine which one performs better under a controlled set of conditions. Here's how each part of the code relates to the A/B testing process:
+
+#### Definition of Two Hyperparameter Sets
+
+The A/B testing starts with defining two distinct sets of hyperparameters (`HYPERPARAMS_A` and `HYPERPARAMS_B`). Each set of hyperparameters configures the training of a BERT model differently, particularly varying the learning rate:
+
+- Variant A uses a learning rate of 1e-5.
+- Variant B uses a learning rate of 2e-5.
+
+#### Training Two Model Variants
+
+The `train_model` function is used to train two models, each configured with one of the hyperparameter sets. This function is integral to the A/B testing because it:
+
+- Trains each model on the same dataset.
+- Logs performance metrics for each training session, such as loss and validation accuracy, which are crucial for comparing the two models.
+
+#### Comparing Models
+
+After training, the `compare_models` step is used to perform the actual comparison between the two models based on the metrics recorded during training. It:
+
+- Compares the validation accuracy and training loss of both models.
+- Determines which model performs better based on the predefined criteria, typically higher accuracy or lower loss.
+
+#### Implementation in a Pipeline
+
+The A/B testing process is structured within a pipeline (`biden_stance_pipeline_ab_test`), ensuring that both models are trained and evaluated under the same conditions (same data splits and preprocessing steps). This setup helps in minimizing variations in the comparison other than the hyperparameters, thus ensuring a fair A/B test.
+
+#### Usage of MLflow
+
+MLflow is used to log the training and validation metrics, which supports the A/B testing by:
+
+- Providing a systematic way to track and store results from multiple training runs.
+- Enabling detailed comparison through its UI where metrics from different runs can be visually compared.
+
+#### Significance in Machine Learning
+
+In machine learning, A/B testing like this is crucial because it allows data scientists to empirically determine which model configurations yield the best results in real-world scenarios. By directly comparing different models, data scientists can make informed decisions about which hyperparameters lead to better model performance, which is particularly important when deploying models in production environments where performance can directly affect business outcomes or user experience.
+
 
 ### Business Testing
 - **Model Application and Impact Assessment:** Evaluate the model's predictions in the context of real-world business scenarios. Focus on the quantification of the impact, particularly the cost implications of model predictions. This includes assessing the costs associated with false positives and false negatives.
@@ -761,7 +763,8 @@ The pipeline is configured using GitHub Actions, which automates the workflow by
 #### `.github/workflows/ml_pipeline_ci_cd.yaml`
 
 ```yaml
-name: ML Pipeline CI/CD Workflow
+
+    name: ZenML Pipeline Execution
 
 on:
   push:
@@ -772,46 +775,46 @@ on:
       - main
 
 jobs:
-  build:
+  run-zenml-pipeline:
     runs-on: ubuntu-latest
+
+    services:
+      cassandra:
+        image: cassandra:latest
+        ports:
+          - 9042:9042
+        options: --health-cmd "cqlsh -e 'DESCRIBE KEYSPACES'" --health-interval 10s --health-timeout 5s --health-retries 5
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.8'
+          python-version: "3.9"
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run tests
+      - name: Run ZenML Pipeline
         run: |
-          pytest tests/
+          python -m zenml up
+          python final_notebook.ipynb
+        env:
+          CASSANDRA_CLUSTER: "localhost"
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - name: Shutdown ZenML services
+        if: always()
+        run: python -m zenml down
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.8'
-
-      - name: Install dependencies
+      - name: Log Metrics to MLflow
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-
-      - name: Deploy to Production
-        run: |
-          echo "Deploying to production server"
-          # Add deployment scripts here
+          pip install mlflow
+          mlflow server --backend-store-uri sqlite:///mlflow.db --default-artifact-root ./mlruns --host
+        env:
+          MLFLOW_TRACKING_URI: http://localhost:5000
+    '''
 
 
