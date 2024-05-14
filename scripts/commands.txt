@@ -39,8 +39,8 @@ Login to your ZenML Cloud tenant
 zenml connect --url https://1947a1bf-zenml.cloudinfra.zenml.io
 zenml connect --url=https://1947a1bf-zenml.cloudinfra.zenml.io
 
-cqlsh> DROP KEYSPACE "keyspace";
-cqlsh> CREATE KEYSPACE "keyspace" WITH replication = {'class': 'SimpleStrategy', 'replication_factor' : 1};
+cqlsh> DROP KEYSPACE "keyspace_1";
+cqlsh> CREATE KEYSPACE "keyspace_1" WITH replication = {'class': 'SimpleStrategy', 'replication_factor' : 1};
 cqlsh> CREATE TABLE "keyspace".features (
    ...     id UUID PRIMARY KEY,
    ...     tokens list<int>,

@@ -15,8 +15,6 @@ feature {
 feature {
   name: "label"
   type: INT
-  bool_domain {
-  }
   presence {
     min_fraction: 1.0
     min_count: 1
@@ -28,7 +26,7 @@ feature {
   }
 }
 feature {
-  name: "tweet_id"
+  name: "__index_level_0__"
   type: INT
   presence {
     min_fraction: 1.0
@@ -42,11 +40,31 @@ feature {
 }
 string_domain {
   name: "text"
-  value: ".@USER on covid-19: we\'ll put the politics aside. we\'ll take the muzzle off the experts so the the public gets the information they need and deserve. honest unvarnished truth. they can handle it. #demconvention @USER HTTP"
-  value: "@USER was it the infanticide lie the nun dropped on us that was helpful?\n#rnc2020"
-  value: "am i the only one that pictures biden this way all the time? #demdebate HTTP"
-  value: "biden is mostly campaigning for the general election, not debating bernie. #democraticdebate"
-  value: "listened to both these guys for 2 hours tonight. much of what i heard is more big government that promises free/free/free, open borders, killing the oil industry and more. thanks, but we went through 8 years of that with obama and many of us do not want to go back.... #demdebate"
-  value: "so jazzed to get to meet future u.s.rep @USER &amp; u.s.sen. @USER at 11:30 today at stonebridge park in fayetteville. #2020election"
-  value: "you know how they say anyone can be president? it\'s not true. trump tried it and he couldn\'t do it. he is literally unable to do the job. so maybe we should give it to someone else\n\n#trumpisaloser #biden2020"
+  value: "@USER Biden\'s environmental policies are exactly what we need right now. #GreenNewDeal"
+  value: "@USER Biden\'s foreign policy experience makes him the best choice for president. #ForeignPolicy"
+  value: "@USER Biden\'s support for LGBTQ rights is commendable. #EqualityForAll"
+  value: "@USER I can\'t trust Biden\'s policies. He\'s not the right choice for America. #Election2024"
+  value: "@user I can\'t believe how biased the media coverage of the election is. #FakeNews"
+  value: "@user I\'m undecided about who to vote for. Need to do more research. #Election2024"
+  value: "@user The debate last night was a mess. Can\'t believe how unprofessional it was. #DebateNight"
+  value: "@user We need to address climate change now! #GreenNewDeal"
+  value: "@user We need to prioritize healthcare in this election. #HealthcareForAll"
+  value: "Biden\'s approach to criminal justice reform needs more attention. #JusticeReform"
+  value: "Biden\'s economic plan is solid and will benefit the middle class. #Economy"
+  value: "Biden\'s infrastructure plan is ambitious but necessary. #Infrastructure"
+  value: "Disappointed with the lack of diversity in the candidates. We need more representation. #Election2024"
+  value: "Disappointed with the lack of substance in the latest campaign rally. #Election2024"
+  value: "Disgusted by the corruption in politics. We need real change. #Election2024"
+  value: "Excited to cast my vote for @candidate in the upcoming election! #Election2024"
+  value: "Excited to see the voter turnout in my community! Let\'s make our voices heard. #ElectionDay"
+  value: "I don\'t trust Biden to handle national security effectively. #SecurityConcerns"
+  value: "I\'m skeptical of Biden\'s ability to unite the country. #Unity"
+  value: "I\'m tired of hearing about Biden\'s gaffes. Let\'s focus on the real issues. #Election2024"
+  value: "Just attended a virtual fundraiser for @candidate. They\'re the right choice for our country. #2024Election"
+  value: "Just finished watching the #DemDebate. It was insightful and informative."
+  value: "Just got my absentee ballot in the mail. Time to vote! #Election2024"
+  value: "Let\'s support Biden in his efforts to improve healthcare access for all Americans. #HealthcareForAll"
+  value: "The negative ads from @opponent are getting out of hand. We need to focus on the issues. #Election2024"
+  value: "Watching the election results come in. Nervous but hopeful. #ElectionNight"
+  value: "Watching the town hall with @candidate. They have some great policies! #TownHall"
 }

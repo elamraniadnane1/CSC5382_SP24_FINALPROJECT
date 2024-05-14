@@ -81,7 +81,7 @@ import pytest
 
 # Constants and Hyperparameters
 CSV_FILE_PATH = 'C:\\Users\\LENOVO\\Desktop\\CSC5382_SP24_FINALPROJECT\\scripts\\dataset_reduced.csv'
-PRETRAINED_LM_PATH = 'C:\\Users\\LENOVO\\Desktop\\bert-election2020-twitter-stance-biden'
+PRETRAINED_LM_PATH = 'C:\\Users\\LENOVO\\Desktop\\bert-election2024-twitter-stance-biden'
 HYPERPARAMS = {
     "batch_size": 4,             # Batch size for training
     "learning_rate": 1e-5,       # Learning rate for the optimizer
@@ -428,27 +428,32 @@ def feature_engineering(data: pd.DataFrame) -> pd.DataFrame:
     """
     try:
         print("Connecting to the Cassandra Database...")
-        cluster = Cluster(contact_points=['127.0.0.1'],port=9042,load_balancing_policy=DCAwareRoundRobinPolicy())
+        cluster = Cluster(contact_points=['127.0.0.1'], port=9042, load_balancing_policy=DCAwareRoundRobinPolicy())
         session = cluster.connect()
-        session.set_keyspace('keyspace')
+        session.set_keyspace('keyspace_1')
         session.execute("""
-            CREATE TABLE IF NOT EXISTS "keyspace".features (
+            CREATE TABLE IF NOT EXISTS "keyspace_1".features (
                 id UUID PRIMARY KEY,
                 features list<int>
             )
         """)
 
-        insert_statement = session.prepare('INSERT INTO "keyspace".features (id, features) VALUES (?, ?)')
+        insert_statement = session.prepare('INSERT INTO keyspace_1.features (id, features) VALUES (?, ?)')
         batch = BatchStatement(consistency_level=ConsistencyLevel.ONE)
         batch_size_limit = 8
+
+        # Initialize 'tokens' column as a list of lists if it does not exist
         if 'tokens' not in data.columns:
-            data['tokens'] = None
+            data['tokens'] = [[] for _ in range(len(data))]
 
         for index, row in data.iterrows():
             row_id = uuid.uuid4()
+            # Example tokenizer function call; ensure it returns a list of integers
             tokens = tokenizer.encode(row['text'], add_special_tokens=True)
+            # Set the tokens in the DataFrame
             data.at[index, 'tokens'] = tokens
-            batch.add(insert_statement, (row_id, tokens))
+            # Add to batch using correct parameters
+            batch.add(insert_statement, row_id, tokens)
 
             if len(batch) >= batch_size_limit:
                 session.execute(batch)
@@ -459,6 +464,7 @@ def feature_engineering(data: pd.DataFrame) -> pd.DataFrame:
 
         print("Feature engineering and data insertion completed successfully.")
         return data
+
 
     except Exception as e:
         logging.error(f"Error during feature engineering: {e}")

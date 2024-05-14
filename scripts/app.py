@@ -23,7 +23,7 @@ app.mount("/scripts", StaticFiles(directory="C:\\Users\\LENOVO\\Desktop\\CSC5356
 templates = Jinja2Templates(directory="C:\\Users\\LENOVO\\Desktop\\CSC5356_SP24\\scripts")
 
 class Config:
-    MODEL_PATH = os.getenv("MODEL_PATH", "C:\\Users\\LENOVO\\Desktop\\bert-election2020-twitter-stance-biden")
+    MODEL_PATH = os.getenv("MODEL_PATH", "C:\\Users\\LENOVO\\Desktop\\bert-election2024-twitter-stance-biden")
 
 @lru_cache()
 def load_model():
