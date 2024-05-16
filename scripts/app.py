@@ -11,8 +11,6 @@ from functools import lru_cache
 from pydantic import BaseModel
 
 logging.basicConfig(level=logging.INFO)
-import nest_asyncio
-nest_asyncio.apply()
 app = FastAPI()
 
 # Assuming static files are also in the scripts directory or a subdirectory therein
@@ -143,4 +141,4 @@ async def dynamic_predict(request: Request):
 
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8000)

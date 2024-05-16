@@ -69,4 +69,4 @@ docker build -t fastapi-bert .
 # Run the Docker container
 docker run -d -p 8000:8000 fastapi-bert
 
-
+zenml connect --url=https://localhost:8080 --username=admin --no-verify-ssl

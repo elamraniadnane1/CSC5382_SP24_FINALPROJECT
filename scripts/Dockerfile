@@ -16,6 +16,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Expose port 8000 for the FastAPI application
 EXPOSE 8000
 
+# Define environment variable to disable uvloop extensions
+ENV UVLOOP_NO_EXTENSIONS 1
+
 # Define environment variable
 ENV MODEL_PATH /app/model
 
