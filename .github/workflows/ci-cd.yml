@@ -1,0 +1,43 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r scripts/requirements.txt
+
+      - name: Test with Pytest
+        run: |
+          pip install pytest
+          pytest scripts/test_script.py
+
+      - name: Build Docker Image
+        run: docker build -t fastapi-bert ./scripts
+
+      - name: Run Docker Container
+        run: docker run -d -p 8000:8000 fastapi-bert
+
+      - name: Verify Docker Container
+        run: |
+          sleep 10  # wait for the container to start
+          curl -f http://localhost:8000/health_check/ || (docker logs $(docker ps -q); exit 1)

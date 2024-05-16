@@ -10,3 +10,10 @@ transformers
 pandas
 nest_asyncio
 torch
+fastapi
+uvicorn
+transformers
+torch
+pandas
+jinja2
+nest_asyncio

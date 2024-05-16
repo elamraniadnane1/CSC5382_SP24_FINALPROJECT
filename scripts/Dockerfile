@@ -1,48 +1,23 @@
 # Use an official Python runtime as a parent image
-FROM python:3.9-slim as builder
+FROM python:3.9
 
 # Set the working directory in the container
-WORKDIR /usr/src/app
+WORKDIR /app
 
-# Use a virtual environment
-ENV VIRTUAL_ENV=/opt/venv
-RUN python -m venv $VIRTUAL_ENV
-ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+# Copy the current directory contents into the container at /app
+COPY . /app
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    gcc \
-    libpq-dev \
-    && rm -rf /var/lib/apt/lists/*
+# Copy the model files into the container
+COPY ./bert-election2024-twitter-stance-biden /app/model
 
-# Install Python dependencies in .venv
-COPY requirements.txt .
+# Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Stage 2: Setup a lighter container
-FROM python:3.9-slim
-
-WORKDIR /usr/src/app
-
-# Copy virtual env from builder stage
-COPY --from=builder /opt/venv /opt/venv
-ENV PATH="/opt/venv/bin:$PATH"
-
-# Copy the scripts directory from your local machine to the container
-COPY C:/Users/LENOVO/Desktop/CSC5356_SP24/scripts /usr/src/app/scripts
-
-# Copy the remaining current directory contents into the container at /usr/src/app
-COPY . .
-
-# Expose the port the app runs on
+# Expose port 8000 for the FastAPI application
 EXPOSE 8000
 
-# Define environment variable for model path
-ENV MODEL_PATH="/usr/src/app/models/bert-election2020-twitter-stance-biden"
+# Define environment variable
+ENV MODEL_PATH /app/model
 
-# Healthcheck to ensure the service is running
-HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
-  CMD curl -f http://localhost:8000/health || exit 1
-
-# Command to run the app
+# Run app.py when the container launches
 CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]

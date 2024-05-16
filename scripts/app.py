@@ -10,7 +10,6 @@ import logging
 from functools import lru_cache
 from pydantic import BaseModel
 
-
 logging.basicConfig(level=logging.INFO)
 import nest_asyncio
 nest_asyncio.apply()
@@ -23,7 +22,7 @@ app.mount("/scripts", StaticFiles(directory="C:\\Users\\LENOVO\\Desktop\\CSC5356
 templates = Jinja2Templates(directory="C:\\Users\\LENOVO\\Desktop\\CSC5356_SP24\\scripts")
 
 class Config:
-    MODEL_PATH = os.getenv("MODEL_PATH", "C:\\Users\\LENOVO\\Desktop\\bert-election2024-twitter-stance-biden")
+    MODEL_PATH = os.getenv("MODEL_PATH", "/app/model")
 
 @lru_cache()
 def load_model():

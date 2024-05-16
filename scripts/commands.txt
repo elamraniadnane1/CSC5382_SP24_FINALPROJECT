@@ -62,3 +62,11 @@ docker logs test-fastapi
 
 docker run -p 8080:8000 --name test-fastapi fastapi-model-server
 
+
+# Build the Docker image
+docker build -t fastapi-bert .
+
+# Run the Docker container
+docker run -d -p 8000:8000 fastapi-bert
+
+

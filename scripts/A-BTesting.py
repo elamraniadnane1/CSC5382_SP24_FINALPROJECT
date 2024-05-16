@@ -9,7 +9,7 @@ from torch.utils.data import DataLoader, TensorDataset, RandomSampler, Sequentia
 from transformers import AdamW, get_linear_schedule_with_warmup
 from tqdm.notebook import tqdm
 import mlflow
-import re
+import re  # Add this import statement
 
 # Function to load data
 def load_data(csv_file_path):
@@ -129,37 +129,9 @@ def evaluate_model(model, dataloader_test, device):
     print('Recall:', recall)
     print('F1 Score:', f1)
     
-    return accuracy, precision, recall, f1, true_vals, np.argmax(predictions, axis=1)
+    return accuracy, precision, recall, f1
 
-# Function to calculate business metrics
-def calculate_business_metrics(true_labels, predictions):
-    total_cost = 0
-    false_positives = 0
-    false_negatives = 0
-    
-    for true_label, pred in zip(true_labels, predictions):
-        if true_label != pred:
-            total_cost += 1  # Assume a cost of 1 for each misclassification
-            if pred == 1:  # Assume label 1 is the positive class
-                false_positives += 1
-            elif pred == 2:  # Assume label 2 is the negative class
-                false_negatives += 1
-    
-    performance_metrics = {
-        'accuracy': accuracy_score(true_labels, predictions),
-        'precision': precision_score(true_labels, predictions, average='macro'),
-        'recall': recall_score(true_labels, predictions, average='macro'),
-        'f1_score': f1_score(true_labels, predictions, average='macro')
-    }
-    
-    return {
-        'total_cost': total_cost,
-        'false_positives': false_positives,
-        'false_negatives': false_negatives,
-        'performance_metrics': performance_metrics
-    }
-
-# Main function for A/B testing with business metrics
+# Main function for A/B testing
 def ab_testing(csv_file_path, pretrained_model_path, hyperparams_a, hyperparams_b):
     data = load_data(csv_file_path)
     data = preprocess_data(data)
@@ -196,36 +168,14 @@ def ab_testing(csv_file_path, pretrained_model_path, hyperparams_a, hyperparams_
     model_b = train_model(model_b, dataloader_train_b, dataloader_val_b, optimizer_b, scheduler_b, device, hyperparams_b['epochs'])
     
     print("Evaluating model A...")
-    accuracy_a, precision_a, recall_a, f1_a, true_vals_a, predictions_a = evaluate_model(model_a, dataloader_test_a, device)
+    accuracy_a, precision_a, recall_a, f1_a = evaluate_model(model_a, dataloader_test_a, device)
     
     print("Evaluating model B...")
-    accuracy_b, precision_b, recall_b, f1_b, true_vals_b, predictions_b = evaluate_model(model_b, dataloader_test_b, device)
-    
-    business_metrics_a = calculate_business_metrics(true_vals_a, predictions_a)
-    business_metrics_b = calculate_business_metrics(true_vals_b, predictions_b)
+    accuracy_b, precision_b, recall_b, f1_b = evaluate_model(model_b, dataloader_test_b, device)
     
     print("A/B Testing Results:")
     print(f"Model A - Accuracy: {accuracy_a}, Precision: {precision_a}, Recall: {recall_a}, F1 Score: {f1_a}")
     print(f"Model B - Accuracy: {accuracy_b}, Precision: {precision_b}, Recall: {recall_b}, F1 Score: {f1_b}")
-    
-    print("Business Metrics for Model A:", business_metrics_a)
-    print("Business Metrics for Model B:", business_metrics_b)
-    
-    def check_thresholds(metrics):
-        return all(value >= 0.7 for value in metrics.values())
-    
-    performance_a = business_metrics_a['performance_metrics']
-    performance_b = business_metrics_b['performance_metrics']
-    
-    if check_thresholds(performance_a):
-        print("All performance metrics for Model A are above 70%.")
-    else:
-        print("Not all performance metrics for Model A are above 70%.")
-    
-    if check_thresholds(performance_b):
-        print("All performance metrics for Model B are above 70%.")
-    else:
-        print("Not all performance metrics for Model B are above 70%.")
 
 # Define hyperparameters for A and B models
 hyperparams_a = {
