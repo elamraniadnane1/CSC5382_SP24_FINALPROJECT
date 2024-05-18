@@ -91,13 +91,18 @@ print(aequitas_df)
 xtab, _ = group.get_crosstabs(aequitas_df)
 
 # Ensure the reference groups dictionary contains all necessary references
-ref_groups_dict = {'score': 0}
+# Fixing the KeyError: 0 by checking if the mode() returns a value or not
+ref_groups_dict = {'score': xtab['score'].mode().iloc[0] if not xtab['score'].mode().empty else 0}
 
 print(ref_groups_dict)
 
 # Calculate the actual number of attributes in the input dataframe
 actual_number_of_attributes = len(aequitas_df.columns)
 print(f"Actual number of attributes in the input dataframe: {actual_number_of_attributes}")
+
+# Check if ref_groups_dict has the necessary keys
+if len(ref_groups_dict) < actual_number_of_attributes:
+    ref_groups_dict['label_value'] = 0
 
 b = bias.get_disparity_predefined_groups(xtab, original_df=aequitas_df, ref_groups_dict=ref_groups_dict)
 f = fairness.get_group_value_fairness(b)
