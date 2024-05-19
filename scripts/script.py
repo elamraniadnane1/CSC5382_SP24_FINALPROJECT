@@ -8,6 +8,7 @@ from aequitas.fairness import Fairness
 import re
 import shap
 import matplotlib.pyplot as plt
+from lime.lime_text import LimeTextExplainer
 
 # Load the model and tokenizer
 MODEL_PATH = 'C:\\Users\\LENOVO\\Desktop\\CSC5382_SP24_FINALPROJECT\\scripts\\bert-election2024-twitter-stance-biden'
@@ -98,3 +99,31 @@ shap_values = explainer.shap_values(sample_data)
 
 # Plot SHAP values for the first prediction
 shap.summary_plot(shap_values, features=sample_data, feature_names=tokenizer.convert_ids_to_tokens(range(max_len)))
+
+# LIME analysis for model explainability
+# Define a wrapper function to make predictions with the tokenizer
+class BertWrapper:
+    def __init__(self, model, tokenizer):
+        self.model = model
+        self.tokenizer = tokenizer
+    
+    def predict_proba(self, texts):
+        tokenized = [self.tokenizer.encode(t, add_special_tokens=True, max_length=max_len, truncation=True, padding='max_length') for t in texts]
+        inputs = torch.tensor(tokenized).to(torch.int64)
+        with torch.no_grad():
+            outputs = self.model(inputs)[0]
+        probabilities = torch.softmax(outputs, dim=1).cpu().numpy()
+        return probabilities
+
+# Create a LIME explainer
+lime_explainer = LimeTextExplainer(class_names=['NONE', 'FAVOR', 'AGAINST'])
+
+# Select an example for explanation
+example_text = data['text'][0]
+
+# Generate LIME explanation
+bert_wrapper = BertWrapper(model, tokenizer)
+lime_exp = lime_explainer.explain_instance(example_text, bert_wrapper.predict_proba, num_features=10)
+
+# Display the LIME explanation
+lime_exp.show_in_notebook(text=example_text)

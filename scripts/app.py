@@ -14,13 +14,14 @@ logging.basicConfig(level=logging.INFO)
 app = FastAPI()
 
 # Assuming static files are also in the scripts directory or a subdirectory therein
-app.mount("/scripts", StaticFiles(directory="C:\\Users\\LENOVO\\Desktop\\CSC5356_SP24\\scripts"), name="scripts")
+app.mount("/scripts", StaticFiles(directory="C:\\Users\\LENOVO\\Desktop\\CSC5382_SP24_FINALPROJECT\\scripts"), name="scripts")
 
 # Setup for templates
-templates = Jinja2Templates(directory="C:\\Users\\LENOVO\\Desktop\\CSC5356_SP24\\scripts")
+templates = Jinja2Templates(directory="C:\\Users\\LENOVO\\Desktop\\CSC5382_SP24_FINALPROJECT\\scripts")
 
 class Config:
-    MODEL_PATH = os.getenv("MODEL_PATH", "/app/model")
+    MODEL_PATH = os.getenv("MODEL_PATH", "C:\\Users\\LENOVO\\Desktop\\CSC5382_SP24_FINALPROJECT\\bert-election2024-twitter-stance-biden")
+    CSV_FILE_PATH = os.getenv("CSV_FILE_PATH", "C:\\Users\\LENOVO\\Desktop\\CSC5382_SP24_FINALPROJECT\\dataset_reduced.csv")
 
 @lru_cache()
 def load_model():
