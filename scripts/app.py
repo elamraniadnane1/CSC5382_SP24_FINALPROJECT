@@ -9,6 +9,7 @@ import os
 import logging
 from functools import lru_cache
 from pydantic import BaseModel
+import matplotlib.pyplot as plt
 
 logging.basicConfig(level=logging.INFO)
 app = FastAPI()
@@ -26,9 +27,14 @@ class Config:
 @lru_cache()
 def load_model():
     logging.info("Loading the BERT model from path: %s", Config.MODEL_PATH)
-    tokenizer = BertTokenizer.from_pretrained(Config.MODEL_PATH)
-    model = BertForSequenceClassification.from_pretrained(Config.MODEL_PATH)
-    return tokenizer, model
+    try:
+        tokenizer = BertTokenizer.from_pretrained(Config.MODEL_PATH)
+        model = BertForSequenceClassification.from_pretrained(Config.MODEL_PATH)
+        logging.info("Model and tokenizer loaded successfully")
+        return tokenizer, model
+    except Exception as e:
+        logging.error(f"Error loading model or tokenizer: {str(e)}")
+        raise
 
 @app.get("/predict_form/")
 async def predict_form(request: Request):
@@ -41,6 +47,8 @@ async def predict(text: str = Form(...)):
         1: "Positive",
         2: "Neutral"
     }
+    logging.info("Received text for prediction: %s", text)
+    
     tokenizer, model = load_model()
     try:
         encoded_input = tokenizer.encode_plus(
@@ -49,16 +57,22 @@ async def predict(text: str = Form(...)):
         )
         input_ids = encoded_input['input_ids']
         attention_mask = encoded_input['attention_mask']
+        
+        logging.info("Input encoded successfully")
 
         model.eval()
         with torch.no_grad():
             outputs = model(input_ids, attention_mask=attention_mask)
             logits = outputs.logits
             predicted_class_id = logits.argmax().item()
+            logging.info("Prediction made successfully: class_id=%d", predicted_class_id)
 
         description = label_descriptions.get(predicted_class_id, "Unknown")
 
         return {"text": text, "class_id": predicted_class_id, "description": description}
+    except ValueError as ve:
+        logging.error(f"Value error during prediction: {str(ve)}")
+        raise HTTPException(status_code=400, detail="Bad request. Please check the input.")
     except Exception as e:
         logging.error(f"Failed to process prediction: {str(e)}")
         raise HTTPException(status_code=500, detail="Internal server error")
@@ -71,12 +85,33 @@ async def upload_form(request: Request):
 @app.post("/load_data/")
 async def load_data(file: UploadFile = File(...)):
     try:
+        # Validate file extension
+        if not file.filename.endswith('.csv'):
+            logging.error(f"File {file.filename} is not a CSV file")
+            raise HTTPException(status_code=400, detail="Invalid file type. Please upload a CSV file.")
+        
+        # Read CSV file
         df = pd.read_csv(file.file)
-        return {"message": "Data loaded successfully", "data": df.head().to_dict()}
+        logging.info(f"Successfully loaded data from {file.filename}")
+        
+        # Return the first few rows of the dataframe and its shape
+        return {
+            "message": "Data loaded successfully",
+            "data": df.head().to_dict(),
+            "shape": {"rows": df.shape[0], "columns": df.shape[1]}
+        }
+    except pd.errors.EmptyDataError:
+        logging.error(f"File {file.filename} is empty")
+        raise HTTPException(status_code=400, detail="The uploaded CSV file is empty.")
+    except pd.errors.ParserError:
+        logging.error(f"File {file.filename} contains parsing errors")
+        raise HTTPException(status_code=400, detail="The uploaded CSV file contains parsing errors.")
     except Exception as e:
-        logging.error(f"Failed to load data: {str(e)}")
-        raise HTTPException(status_code=500, detail="Failed to load data")
-    
+        logging.error(f"Failed to load data from {file.filename}: {str(e)}")
+        raise HTTPException(status_code=500, detail="Failed to load data due to an internal server error")
+
+
+
 @app.post("/analyze_data/")
 async def analyze_data(file: UploadFile = File(...)):
     try:
@@ -90,7 +125,6 @@ async def analyze_data(file: UploadFile = File(...)):
     except Exception as e:
         logging.error(f"Failed to analyze data: {str(e)}")
         raise HTTPException(status_code=500, detail="Failed to analyze data")
-
 
 @app.post("/visualize_data/")
 async def visualize_data(file: UploadFile = File(...)):
@@ -109,7 +143,6 @@ async def visualize_data(file: UploadFile = File(...)):
 @app.get("/health_check/")
 async def health_check():
     return {"status": "running", "message": "API is healthy"}
-
 
 @app.post("/dynamic_predict/")
 async def dynamic_predict(request: Request):
@@ -139,7 +172,6 @@ async def dynamic_predict(request: Request):
     }.get(predicted_class_id, "Unknown")
 
     return {"text": text, "class_id": predicted_class_id, "description": description}
-
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
